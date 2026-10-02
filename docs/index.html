@@ -1,0 +1,845 @@
+<title>ฤๅษีดัดตน Lersi</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="ฤๅษีดัดตน 41 ท่า วาดด้วยคณิตศาสตร์แบบล้านนา ค้นหา กรอง จัดชุดเอง แล้วส่งต่อ · Lersi dat ton, the Thai hermit's self-stretching: 41 positions drawn with math, Lanna style.">
+<meta name="theme-color" content="#16100d">
+<link rel="canonical" href="https://nanobotco.github.io/lersi/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NaNoBotCo">
+<meta property="og:title" content="ฤๅษีดัดตน · Lersi">
+<meta property="og:description" content="41 ท่า วาดด้วยคณิตศาสตร์แบบล้านนา จัดชุดเอง แล้วส่งต่อ · 41 positions of the Thai hermit's self-stretching, drawn with math, Lanna style. Build a routine and send it.">
+<meta property="og:url" content="https://nanobotco.github.io/lersi/">
+<meta property="og:image" content="https://nanobotco.github.io/lersi/card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Three hermits in gilt Lanna niches on black lacquer, seated, standing and kneeling, with the words ฤๅษีดัดตน.">
+<meta property="og:locale" content="th_TH">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nanobotco.github.io/lersi/card.jpg">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Anuphan:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+/* Layout: a phone-first practice app — the lacquered niche (the stage) on top, three tabs
+   (practise · positions · my routine). Wide screens set the niche beside its words.
+   The niche is a fixed object, black lacquer and gold in both themes; the page around it follows the theme. */
+:root{
+  --ground:#e8ece2; --panel:#f6f7f1; --ink:#1c2620; --muted:#56655a; --rule:#cbd4c4;
+  --lacquer:#8e2b20; --gold:#9c7020; --chip:#dfe6d7; --on-lacquer:#fff6e6;
+  --f-seat:#8e2b20; --f-stand:#2b4384; --f-kneel:#21654f; --f-lie:#6a3a76;
+  --display:"Charm","Anuphan",serif; --body:"Anuphan","Noto Sans Thai",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#111613; --panel:#1a211c; --ink:#e6ebdf; --muted:#9aa79c; --rule:#2d3a31;
+  --lacquer:#e0765f; --gold:#d9ad4f; --chip:#232c26; --on-lacquer:#1b0f0b;
+  --f-seat:#e0765f; --f-stand:#8fa6ea; --f-kneel:#6cc4a3; --f-lie:#c79ad3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ground:#111613; --panel:#1a211c; --ink:#e6ebdf; --muted:#9aa79c; --rule:#2d3a31;
+  --lacquer:#e0765f; --gold:#d9ad4f; --chip:#232c26; --on-lacquer:#1b0f0b;
+  --f-seat:#e0765f; --f-stand:#8fa6ea; --f-kneel:#6cc4a3; --f-lie:#c79ad3; color-scheme:dark}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--ground);color:var(--ink);font:17px/1.5 var(--body);margin:0}
+.app{max-width:1060px;margin:0 auto;padding:12px 16px 40px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
+h1{font:700 34px/1 var(--display);margin:0;color:var(--lacquer)}
+h1 small{font:500 13px var(--body);color:var(--muted);letter-spacing:.12em;margin-left:8px}
+.seg{display:flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--panel)}
+.seg button{background:none;border:0;color:var(--muted);font:500 14px var(--body);padding:7px 12px;cursor:pointer;min-height:36px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+nav.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);padding:4px 0}
+nav.tabs button{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:12px;padding:9px 6px;font:600 16px var(--body);cursor:pointer;min-width:0}
+nav.tabs button[aria-selected="true"]{background:var(--lacquer);border-color:var(--lacquer);color:var(--on-lacquer)}
+nav.tabs .n{font-weight:500;opacity:.8;font-size:13px;margin-left:4px}
+button{font-family:var(--body)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 15px var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.chip[aria-pressed="true"]{border-color:var(--lacquer);box-shadow:inset 0 0 0 1px var(--lacquer);background:var(--chip)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.practice{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.practice{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}.practice .side{position:sticky;top:64px}}
+.stagebox{display:flex;flex-direction:column;gap:6px;min-width:0}
+.stage{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;max-width:100%;background:#16100d;box-shadow:0 1px 0 #0003,0 10px 30px -18px #000c}
+.stage canvas{width:100%;height:100%;display:block}
+.phase{position:absolute;left:0;right:0;top:3.2%;text-align:center;font:600 16px var(--body);color:#f4e2b0;letter-spacing:.04em;text-shadow:0 1px 3px #000}
+.count{position:absolute;right:3%;bottom:2.4%;font:600 14px var(--body);color:#e9d39a;font-variant-numeric:tabular-nums;text-shadow:0 1px 3px #000}
+.math{font:500 13px/1.4 var(--body);color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.02em;min-height:1.4em;overflow-wrap:anywhere}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pose h2{font:700 30px/1.2 var(--display);margin:0;text-wrap:balance}
+.pose .en{color:var(--muted);font-size:15px}
+.pose p{margin:6px 0 0;font-size:17px}
+.tags{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--muted);margin-top:6px;align-items:center}
+.tags span{display:inline-flex;align-items:center;gap:5px}
+.controls{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:10px}
+.controls button{border:0;border-radius:14px;padding:14px 8px;font:600 18px var(--body);cursor:pointer;background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.controls .go{background:var(--lacquer);border-color:var(--lacquer);color:var(--on-lacquer)}
+.strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.strip button{flex:0 0 68px;border:1px solid var(--rule);background:var(--panel);border-radius:10px;padding:3px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font:500 12px var(--body)}
+.strip button[aria-current="true"]{border-color:var(--lacquer);color:var(--lacquer);box-shadow:inset 0 0 0 1px var(--lacquer)}
+.strip img,.thumb{width:60px;height:60px;border-radius:7px;background:#16100d;display:block}
+details{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px 14px}
+summary{cursor:pointer;font-weight:600}
+.set{display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:center;margin-top:10px;font-size:16px}
+.set output{font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;font-weight:600}
+input[type=range]{accent-color:var(--lacquer);grid-column:1/-1;width:100%;margin:-4px 0 4px}
+.note{font-size:14px;color:var(--muted);margin:10px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:12px;padding:9px 14px;font:600 15px var(--body);cursor:pointer;min-height:42px}
+.btn.primary{background:var(--lacquer);border-color:var(--lacquer);color:var(--on-lacquer)}
+.btn.small{padding:6px 10px;min-height:36px;font-size:14px}
+.share{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.share h3,.lib h3,.mine h3{margin:0;font:700 22px/1.2 var(--display);color:var(--lacquer)}
+.linkbox{width:100%;box-sizing:border-box;border:1px solid var(--rule);background:var(--ground);color:var(--ink);border-radius:10px;padding:8px 10px;font:500 14px var(--body)}
+/* positions */
+.lib{display:flex;flex-direction:column;gap:12px}
+.search{width:100%;box-sizing:border-box;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:12px;padding:12px 14px;font:500 17px var(--body)}
+.fgroup{display:flex;flex-direction:column;gap:6px}
+.fgroup b{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card .pic{border:0;padding:0;background:#16100d;cursor:pointer;display:block;aspect-ratio:1/1;width:100%}
+.card .pic img{width:100%;height:100%;display:block}
+.card .txt{padding:8px 10px 0;display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.card .th{font-weight:600;font-size:15px;line-height:1.3}
+.card .enn{font-size:13px;color:var(--muted);line-height:1.3}
+.card .meta{font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.card .add{margin:8px 10px 10px;border:1px solid var(--lacquer);color:var(--lacquer);background:none;border-radius:10px;padding:7px;font:600 14px var(--body);cursor:pointer}
+.card .add[aria-pressed="true"]{background:var(--lacquer);color:var(--on-lacquer)}
+.count-line{font-size:15px;color:var(--muted)}
+/* my routine */
+.mine{display:flex;flex-direction:column;gap:12px}
+.mlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:m}
+.mlist li{display:grid;grid-template-columns:auto 52px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:6px 8px}
+.mlist li::before{counter-increment:m;content:counter(m);font:600 15px var(--body);color:var(--muted);min-width:1.4em;text-align:right;font-variant-numeric:tabular-nums}
+.mlist img{width:52px;height:52px;border-radius:7px;background:#16100d;display:block}
+.mlist .nm{min-width:0;font-size:15px;line-height:1.3}
+.mlist .nm small{display:block;color:var(--muted);font-size:13px}
+.mlist .ops{display:flex;gap:4px}
+.mlist .ops button{border:1px solid var(--rule);background:var(--ground);color:var(--ink);border-radius:8px;width:36px;height:36px;font-size:16px;cursor:pointer}
+.empty{border:1px dashed var(--rule);border-radius:14px;padding:18px;color:var(--muted);text-align:center}
+.about{font-size:15px;color:var(--ink)}
+.about p{margin:8px 0 0;max-width:65ch}
+.about .eq{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+/* overlay + toast */
+.overlay{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.overlay .box{background:var(--panel);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;max-width:520px;width:100%;max-height:100%;box-sizing:border-box;overflow:auto}
+.overlay img{width:100%;height:auto;border-radius:10px;display:block}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:10px 16px;border-radius:999px;font:600 15px var(--body);z-index:30}
+button:focus-visible,summary:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+html.lang-th .en-only,html.lang-en .th-only{display:none}
+html.lang-both .en-only.sep::before{content:" · "}
+</style>
+
+<div class="app">
+  <header>
+    <h1>ฤๅษีดัดตน<small>LERSI</small></h1>
+    <div class="seg" role="group" aria-label="ภาษา Language">
+      <button id="lang-th" data-lang="th">ไทย</button>
+      <button id="lang-both" data-lang="both">ทั้งคู่</button>
+      <button id="lang-en" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-practice" data-tab="practice"><span class="th-only">ฝึก</span><span class="en-only sep">Practise</span></button>
+    <button role="tab" id="tab-lib" data-tab="lib"><span class="th-only">ท่า</span><span class="en-only sep">Positions</span><span class="n" id="n-all"></span></button>
+    <button role="tab" id="tab-mine" data-tab="mine"><span class="th-only">ชุดของฉัน</span><span class="en-only sep">My routine</span><span class="n" id="n-mine"></span></button>
+  </nav>
+
+  <!-- ===== practise ===== -->
+  <section id="view-practice" class="practice" role="tabpanel">
+    <div class="stagebox">
+      <div class="chips" id="routines" role="group" aria-label="ชุดท่า Routine"></div>
+      <div class="stage">
+        <canvas id="stage" role="img" aria-label="ท่าฤๅษีดัดตนที่กำลังทำ The position being practised"></canvas>
+        <div class="phase" id="phase" aria-live="polite"></div>
+        <div class="count" id="count"></div>
+      </div>
+      <div class="math" id="math" title="มุมข้อต่อ: ลำตัว ศีรษะ | แขนขวา บน ล่าง | แขนซ้าย | ขาขวา บน ล่าง | ขาซ้าย · Joint angles: torso, head | right arm | left arm | right leg | left leg"></div>
+    </div>
+    <div class="side">
+      <div class="pose">
+        <h2><span class="th-only" id="name-th"></span></h2>
+        <div class="en en-only" id="name-en"></div>
+        <p><span class="th-only" id="cue-th"></span> <span class="en-only en" id="cue-en"></span></p>
+        <div class="tags" id="pose-tags"></div>
+      </div>
+      <div class="controls">
+        <button id="prev" aria-label="ท่าก่อนหน้า Previous">◀</button>
+        <button id="play" class="go"></button>
+        <button id="next" aria-label="ท่าถัดไป Next">▶</button>
+      </div>
+      <div class="strip" id="strip" aria-label="ท่าในชุดนี้ Positions in this routine"></div>
+      <div class="row">
+        <button class="btn small" id="share-pose"><span class="th-only">ส่งท่านี้</span><span class="en-only sep">Send this position</span></button>
+        <button class="btn small" id="share-run"><span class="th-only">ส่งชุดนี้</span><span class="en-only sep">Send this routine</span></button>
+        <button class="btn small" id="add-pose"></button>
+      </div>
+      <details>
+        <summary><span class="th-only">ตั้งค่า</span><span class="en-only sep">Settings</span></summary>
+        <div class="set">
+          <label for="s-hold"><span class="th-only">ค้างท่า (วินาที)</span><span class="en-only sep">Hold (seconds)</span></label><output id="o-hold"></output>
+          <input type="range" id="s-hold" min="4" max="40" step="2">
+          <label for="s-reps"><span class="th-only">จำนวนรอบ ต่อข้าง</span><span class="en-only sep">Rounds per side</span></label><output id="o-reps"></output>
+          <input type="range" id="s-reps" min="1" max="6" step="1">
+          <label for="s-breath"><span class="th-only">ลมหายใจเข้า/ออก (วินาที)</span><span class="en-only sep">Breath in / out (seconds)</span></label><output id="o-breath"></output>
+          <input type="range" id="s-breath" min="3" max="8" step="1">
+          <label for="s-bell"><span class="th-only">เสียงระฆังเมื่อเปลี่ยนจังหวะ</span><span class="en-only sep">Bell on each change</span></label>
+          <input type="checkbox" id="s-bell" style="grid-column:auto;justify-self:end;width:22px;height:22px;accent-color:var(--lacquer)">
+        </div>
+        <p class="note"><span class="th-only">ค่อยๆ ทำ ไปเท่าที่สบาย เจ็บให้หยุด</span><span class="en-only sep">Move slowly and only as far as is comfortable; stop at pain.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== positions ===== -->
+  <section id="view-lib" class="lib" role="tabpanel" hidden>
+    <input type="search" class="search" id="q" placeholder="ค้นหา เช่น คอ ไหล่ นอน · Search: neck, shoulders, lying…" aria-label="ค้นหาท่า Search positions">
+    <div class="fgroup"><b><span class="th-only">ท่าทาง</span><span class="en-only sep">POSTURE</span></b><div class="chips" id="f-fam"></div></div>
+    <div class="fgroup"><b><span class="th-only">ส่วนที่ได้ยืด</span><span class="en-only sep">WORKS</span></b><div class="chips" id="f-area"></div></div>
+    <div class="fgroup"><b><span class="th-only">ระดับ</span><span class="en-only sep">LEVEL</span></b><div class="chips" id="f-lv"></div></div>
+    <div class="row" style="justify-content:space-between">
+      <span class="count-line" id="lib-count"></span>
+      <span class="row">
+        <button class="btn small" id="lib-clear"><span class="th-only">ล้างตัวกรอง</span><span class="en-only sep">Clear filters</span></button>
+        <button class="btn small primary" id="lib-addall"><span class="th-only">เพิ่มที่เห็นทั้งหมด</span><span class="en-only sep">Add all shown</span></button>
+      </span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- ===== my routine ===== -->
+  <section id="view-mine" class="mine" role="tabpanel" hidden>
+    <div class="row" style="justify-content:space-between">
+      <h3><span class="th-only">ชุดของฉัน</span><span class="en-only sep">My routine</span></h3>
+      <span class="count-line" id="mine-sum"></span>
+    </div>
+    <ol class="mlist" id="mlist"></ol>
+    <div class="empty" id="mine-empty" hidden>
+      <span class="th-only">ยังไม่มีท่า ไปที่แท็บ “ท่า” แล้วกด “+ เพิ่ม” หรือเริ่มจากชุดสำเร็จด้านล่าง</span>
+      <span class="en-only sep">No positions yet. Open Positions and tap “+ Add”, or start from a set below.</span>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="mine-go"><span class="th-only">เริ่มฝึกชุดนี้</span><span class="en-only sep">Practise this routine</span></button>
+      <button class="btn" id="mine-clear"></button>
+    </div>
+    <div class="fgroup"><b><span class="th-only">เริ่มจากชุดสำเร็จ</span><span class="en-only sep">START FROM A SET</span></b><div class="chips" id="presets"></div></div>
+    <div class="share">
+      <h3><span class="th-only">ส่งต่อ</span><span class="en-only sep">Send</span></h3>
+      <input class="linkbox" id="mine-link" readonly aria-label="ลิงก์ชุดนี้ Link to this routine">
+      <div class="row">
+        <button class="btn" id="mine-copy"><span class="th-only">คัดลอกลิงก์</span><span class="en-only sep">Copy link</span></button>
+        <button class="btn" id="mine-text"><span class="th-only">คัดลอกเป็นข้อความ</span><span class="en-only sep">Copy as text</span></button>
+        <button class="btn primary" id="mine-card"><span class="th-only">การ์ดรูป</span><span class="en-only sep">Picture card</span></button>
+      </div>
+      <p class="note"><span class="th-only">ลิงก์พาไปที่ชุดนี้พร้อมเวลาค้างท่า การ์ดรูปมีคิวอาร์โค้ด วางในไลน์หรือพิมพ์ติดผนังได้</span><span class="en-only sep">The link opens this routine with its timings. The picture card carries a QR code for LINE, a phone camera, or the wall.</span></p>
+    </div>
+    <details class="about">
+      <summary><span class="th-only">ที่มาของท่าและภาพ</span><span class="en-only sep">About the positions and the drawings</span></summary>
+      <p><span class="th-only">“ฤๅษี” คือนักพรต “ดัด” คือยืดหรือดัด “ตน” คือตัวเอง ฤๅษีดัดตนจึงเป็นท่าที่นักพรตใช้ดัดกายตนเอง ปี พ.ศ. 2379 รัชกาลที่ 3 โปรดให้หล่อรูปฤๅษีดัดตน 80 ท่าไว้ที่วัดโพธิ์ พร้อมโคลงบอกสรรพคุณจารึกบนแผ่นหินอ่อน ปี 2381 มีสมุดไทยดำ “สมุดภาพฤๅษีดัดตนแก้โรคต่างๆ 80 รูป” เก็บอยู่ที่หอสมุดแห่งชาติ ทั้งระบบรวมท่าแปรแล้วมีเกือบ 200 ท่า</span><span class="en-only sep">“Reusi” is a hermit, “dat” to stretch or adjust, “ton” oneself. In 1836 King Rama III commissioned 80 Reusi Dat Ton statues for Wat Pho, each with a poem on a marble tablet naming its use; an 1838 black-paper khoi manuscript of the 80 is held at the National Library in Bangkok. With variations the whole system runs close to 200 exercises. (David Wells, “Reusi Dat Ton: The Thai Hermit’s Exercises”, 2010.)</span></p>
+      <p><span class="th-only">ชื่อท่าในแอปนี้บอกลักษณะการเคลื่อนไหว ไม่ใช่ชื่อท่าตามจารึก</span><span class="en-only sep">Names here describe the movement; they are not the names on the Wat Pho tablets.</span></p>
+      <p><span class="th-only">ภาพทุกภาพคำนวณจากมุมข้อต่อ 11 ค่า ส่วนลายประดับคำนวณจากสมการ</span><span class="en-only sep">Each figure is computed from 11 joint angles, and the ornament from equations:</span></p>
+      <p class="eq">ข้อต่อ joints: x = x₀ + Σ ℓᵢ(−sin θᵢ, cos θᵢ), θᵢ = Σ มุมตามสาย angles down the chain<br>
+      ดอกบัวรอบตัว the lotus halo: r = R(1 + 0.06 cos 16φ)·(1 + 0.05 b), b = ลมหายใจ the breath<br>
+      ดอกประจำยาม the four-petal flowers: r = s·|cos 2φ|<sup>0.7</sup><br>
+      ซุ้ม the arch: B(t) = (1−t)³P₀ + 3(1−t)²tP₁ + 3(1−t)t²P₂ + t³P₃<br>
+      สร้อยประคำ the beads: y = a·cosh(x/a)<br>
+      ตุง the flags: x = A·(y/L)·sin(ky − ωt)</p>
+    </details>
+  </section>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="box" role="dialog" aria-modal="true" aria-label="การ์ดรูป Picture card">
+    <img id="card-img" alt="">
+    <p class="note" id="card-hint"><span class="th-only">กดค้างที่รูปเพื่อบันทึกหรือส่งต่อ</span><span class="en-only sep">Long-press the picture to save or send it.</span></p>
+    <div class="row">
+      <button class="btn" id="card-close"><span class="th-only">ปิด</span><span class="en-only sep">Close</span></button>
+      <button class="btn primary" id="card-share" hidden><span class="th-only">ส่ง</span><span class="en-only sep">Send</span></button>
+      <button class="btn" id="card-save" hidden><span class="th-only">บันทึกรูป</span><span class="en-only sep">Save picture</span></button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+'use strict';
+/* ================================================================ the body
+   Forward kinematics: every joint stores an angle relative to its parent.
+   world angle = sum down the chain; joint = parent + ℓ·(−sin a, cos a); a = 0 is straight up,
+   positive turns toward −x. Front view: the figure faces us, R is the figure's right (our left).
+   Side view: the figure faces −x; + torso bends forward, − thigh lifts the leg forward,
+   + shin bends the knee, − forearm bends the elbow. */
+const L={torso:3,neck:.45,head:.6,upper:1.55,fore:1.45,thigh:2.1,shin:2,sh:.95,hip:.55};
+const KEYS=['torso','head','pelvis','Ru','Rf','Lu','Lf','Rt','Rs','Lt','Ls','cx'];
+const dir=a=>{const r=a*Math.PI/180;return[-Math.sin(r),Math.cos(r)]};
+const add=(a,b,k=1)=>[a[0]+b[0]*k,a[1]+b[1]*k], mid=(a,b,u=.5)=>[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];
+function fk(p,side){
+  const P={},t=p.torso||0,pv=p.pelvis||0,sw=side?0:1,pel=[0,0],ut=dir(t),px=dir(t+90),qx=dir(pv+90);
+  const neck=add(pel,ut,L.torso);P.pel=pel;P.neck=neck;P.t=t;P.pv=pv;
+  const ha=t+(p.head||0);P.ha=ha;P.head=add(neck,dir(ha),L.neck+L.head);
+  for(const [s,g] of [['R',1],['L',-1]]){
+    const sho=add(neck,px,g*L.sh*sw),a1=t+(p[s+'u']||0),elb=add(sho,dir(a1),L.upper),a2=a1+(p[s+'f']||0),wr=add(elb,dir(a2),L.fore);
+    const hip=add(pel,qx,g*L.hip*sw),b1=pv+180+(p[s+'t']||0),kn=add(hip,dir(b1),L.thigh),b2=b1+(p[s+'s']||0),an=add(kn,dir(b2),L.shin);
+    Object.assign(P,{[s+'sho']:sho,[s+'elb']:elb,[s+'wr']:wr,[s+'hip']:hip,[s+'kn']:kn,[s+'an']:an,[s+'a1']:a1,[s+'a2']:a2,[s+'b1']:b1,[s+'b2']:b2});
+  }
+  return P;
+}
+/* the floor: whatever reaches lowest rests on it */
+const GR=[['pel',.4],['neck',.42],['head',.6],['Rkn',.3],['Lkn',.3],['Ran',.24],['Lan',.24],['Rwr',.16],['Lwr',.16],['Relb',.22],['Lelb',.22]];
+function placed(p,side){
+  const P=fk(p,side);let m=Infinity;for(const [k,r] of GR)m=Math.min(m,P[k][1]-r);
+  for(const k in P)if(Array.isArray(P[k]))P[k]=[P[k][0],P[k][1]-m];
+  return P;
+}
+function bbox(P){let x0=1e9,x1=-1e9,y1=-1e9;const hat=add(P.head,dir(P.ha),1.95);
+  for(const q of [P.head,hat,P.Rwr,P.Lwr,P.Relb,P.Lelb,P.Ran,P.Lan,P.Rkn,P.Lkn,P.pel,P.neck,P.Rsho,P.Lsho]){x0=Math.min(x0,q[0]-.45);x1=Math.max(x1,q[0]+.45);y1=Math.max(y1,q[1]+.3)}
+  return {x0,x1,w:x1-x0,h:y1,cx:(x0+x1)/2};
+}
+function mirror(p,side){const q={};for(const k of KEYS){if(k==='cx')continue;const v=p[k]||0;
+  if(k.length===2&&(k[0]==='R'||k[0]==='L')){const o=(k[0]==='R'?'L':'R')+k[1];q[o]=side?v:-v}else q[k]=side?v:-v}return q}
+const lerp=(a,b,u)=>{const q={};for(const k of KEYS)q[k]=(a[k]||0)+((b[k]||0)-(a[k]||0))*u;return q};
+const withCx=(p,side)=>{if(p.cx==null)p.cx=bbox(placed(p,side)).cx;return p};
+
+/* ================================================================ the positions */
+const SEATED={Ru:165,Rf:-20,Lu:-165,Lf:20,Rt:-80,Rs:155,Lt:80,Ls:-155};
+const STAND={Ru:172,Rf:0,Lu:-172,Lf:0,Rt:-6,Rs:0,Lt:6,Ls:0};
+const LONG={Ru:180,Rf:0,Lu:180,Lf:0,Rt:-90,Rs:0,Lt:-90,Ls:0};
+const STANDS={Ru:176,Rf:-6,Lu:178,Lf:-6,Rt:0,Rs:0,Lt:0,Ls:0};
+const KNEEL={Ru:170,Rf:-35,Lu:170,Lf:-35,Rt:-88,Rs:178,Lt:-88,Ls:178};
+const SUPINE={torso:-90,pelvis:-90,Ru:180,Rf:0,Lu:180,Lf:0,Rt:0,Rs:0,Lt:0,Ls:0};
+const PRONE={torso:90,pelvis:90,Ru:180,Rf:0,Lu:180,Lf:0,Rt:0,Rs:0,Lt:0,Ls:0};
+const BASES={seat:[SEATED,0,'seat'],long:[LONG,1,'seat'],stand:[STAND,0,'stand'],stands:[STANDS,1,'stand'],kneel:[KNEEL,1,'kneel'],supine:[SUPINE,1,'lie'],prone:[PRONE,1,'lie']};
+const PRAY={Ru:165,Rf:-225,Lu:-165,Lf:225}, UP={Ru:12,Rf:-62,Lu:-12,Lf:62};
+/* id, base, two sides?, level 1-3, areas, names, cues, angles; back: arms pass behind the body */
+const POSES=[
+ ['ov','seat',0,1,'shoulders side breath','นั่งประนมมือเหนือศีรษะ','Seated, palms joined overhead',
+  'นั่งขัดสมาธิ หายใจเข้ายกแขนขึ้น พนมมือเหนือศีรษะ ยืดลำตัวขึ้น','Sit cross-legged. Breathe in, raise the arms, join the palms overhead, lengthen upward.',{...SEATED,...UP}],
+ ['sb','seat',1,1,'side shoulders','นั่งเอนตัวข้าง','Seated side bend',
+  'มือหนึ่งวางพื้น อีกแขนยกข้ามศีรษะ เอนลำตัวไปทางมือที่วางพื้น','One hand on the floor, the other arm over the head; lean toward the grounded hand.',{...SEATED,torso:22,head:8,Ru:140,Rf:10,Lu:8,Lf:38}],
+ ['wd','seat',0,1,'shoulders arms breath','นั่งกางแขน','Seated, arms spread wide',
+  'กางแขนออกสองข้างระดับไหล่ เหยียดปลายนิ้วออกไปให้ไกล','Spread the arms to shoulder height and reach out through the fingertips.',{...SEATED,Ru:90,Rf:0,Lu:-90,Lf:0}],
+ ['nk','seat',1,1,'neck','นั่งเอียงคอ มือดึงศีรษะ','Seated neck stretch',
+  'เอียงศีรษะไปด้านหนึ่ง มืออีกข้างอ้อมวางบนศีรษะ ดึงเบาๆ','Tilt the head to one side; the far hand rests over the head and draws gently.',{...SEATED,head:30,Lu:-30,Lf:118}],
+ ['ac','seat',1,1,'shoulders arms','นั่งดึงแขนพาดอก','Seated, arm drawn across the chest',
+  'เหยียดแขนข้างหนึ่งพาดอก ใช้แขนอีกข้างกดไว้','Bring one straight arm across the chest and hold it with the other arm.',{...SEATED,Ru:-100,Rf:0,Lu:-165,Lf:210}],
+ ['pr','seat',0,1,'breath','นั่งพนมมือที่อก หายใจช้า','Seated, palms joined at the chest, slow breath',
+  'นั่งตัวตรง พนมมือระดับอก หายใจเข้าทางจมูกช้าๆ หายใจออกให้ยาวกว่าหายใจเข้า','Sit tall, palms joined at the chest. Breathe in slowly through the nose; let each out-breath run longer than the in-breath.',{...SEATED,...PRAY}],
+ ['sh','seat',0,1,'shoulders back','นั่งมือแตะไหล่ กางศอก','Seated, fingertips on the shoulders, elbows wide',
+  'วางปลายนิ้วบนไหล่ กางศอกออก หายใจเข้าเปิดอก หายใจออกคลาย','Fingertips on the shoulders, elbows out. Breathe in and open the chest; breathe out and soften.',{...SEATED,Ru:95,Rf:-155,Lu:-95,Lf:155}],
+ ['eb','seat',0,1,'shoulders back neck','นั่งประสานมือท้ายทอย','Seated, hands laced behind the head',
+  'ประสานนิ้วไว้ที่ท้ายทอย ดึงศอกไปด้านหลัง ยกอกขึ้น ไม่ดันศีรษะไปข้างหน้า','Lace the fingers behind the head, draw the elbows back and lift the chest without pushing the head forward.',{...SEATED,Ru:40,Rf:-128,Lu:-40,Lf:128},1],
+ ['ey','seat',0,1,'eyes breath','นั่งเอาฝ่ามือปิดตา','Seated, palms over the eyes',
+  'ถูฝ่ามือให้อุ่น แล้ววางปิดตาเบาๆ หายใจช้าๆ ให้ตาได้พักในความมืด','Rub the palms warm, cup them gently over the closed eyes, breathe slowly and let the eyes rest in the dark.',{...SEATED,Ru:30,Rf:-132,Lu:-30,Lf:132}],
+ ['cl','seat',0,2,'shoulders back breath','นั่งประสานมือไว้ด้านหลัง เปิดอก','Seated, hands clasped behind, chest open',
+  'ประสานมือไว้ด้านหลัง เหยียดแขนลง ดึงสะบักเข้าหากัน ยกอกขึ้น','Clasp the hands behind you, straighten the arms down, draw the shoulder blades together and lift the chest.',{...SEATED,Ru:194,Rf:12,Lu:-194,Lf:-12},1],
+ ['lf','long',0,2,'back legs','นั่งเหยียดขา ก้มตัวไปทางปลายเท้า','Legs straight, fold toward the feet',
+  'นั่งเหยียดขาตรงไปข้างหน้า หายใจเข้ายืดหลัง หายใจออกก้มไปทางปลายเท้า ไปเท่าที่สบาย','Sit with the legs straight out. Breathe in to lengthen the back; breathe out and fold toward the feet, only as far as is easy.',{...LONG,torso:58,head:12,Ru:48,Rf:0,Lu:48,Lf:0}],
+ ['lb','long',0,1,'shoulders back breath','นั่งเหยียดขา เอนหลังเท้าแขน','Legs straight, lean back on the hands',
+  'วางมือบนพื้นด้านหลัง นิ้วชี้ไปทางเท้า เอนตัวไปด้านหลัง ยกอก เงยหน้าเล็กน้อย','Hands on the floor behind you, fingers toward the feet. Lean back, lift the chest, raise the chin a little.',{...LONG,torso:-25,head:-15,Ru:225,Rf:0,Lu:225,Lf:0}],
+ ['lh','long',1,1,'hips back','นั่งกอดเข่าชิดอก','Seated, one knee hugged to the chest',
+  'ชันเข่าข้างหนึ่ง โอบแขนรอบหน้าแข้ง ดึงเข่าเข้าหาอก นั่งหลังตรง','Bend one knee, wrap the arms around the shin, draw the knee to the chest and sit tall.',{...LONG,torso:4,Rt:-140,Rs:132,Ru:148,Rf:-52,Lu:150,Lf:-48}],
+ ['rc','stand',0,1,'shoulders side breath','ยืนเหยียดแขนขึ้น','Standing, arms stretched up',
+  'ยืนเท้าชิด หายใจเข้ายกแขนขึ้นเหนือศีรษะ เหยียดทั้งตัว','Stand with the feet together. Breathe in, lift both arms overhead, stretch the whole body.',{...STAND,Ru:8,Rf:0,Lu:-8,Lf:0}],
+ ['yb','stand',1,1,'side shoulders','ยืนเอนตัวข้าง','Standing side bend',
+  'แขนหนึ่งแนบลำตัว อีกแขนยกข้ามศีรษะ เอนไปด้านข้าง','One arm down the side, the other over the head; lean sideways.',{...STAND,torso:18,head:6,Ru:168,Rf:0,Lu:10,Lf:30}],
+ ['hs','stand',1,1,'side back','ยืนเท้าสะเอว เอนตัวข้าง','Hands on the hips, side bend',
+  'ยืนเท้าห่างเท่าสะโพก เท้าสะเอว เอนลำตัวไปด้านข้าง สะโพกอยู่กับที่','Feet hip-width, hands on the hips; lean the upper body sideways while the hips stay put.',{...STAND,torso:15,head:5,Rt:-9,Lt:9,Ru:155,Rf:66,Lu:-155,Lf:-66}],
+ ['ar','stand',1,1,'side shoulders','ยืนยกแขนเดียวขึ้นสูง','One arm up, one arm down',
+  'แขนหนึ่งยกขึ้นเหนือศีรษะ อีกแขนกดลงข้างลำตัว ยืดออกจากกันเหมือนดึงเชือก','One arm overhead, the other pressing down by the side; stretch them apart like a drawn rope.',{...STAND,torso:5,Ru:6,Rf:0,Lu:-176,Lf:0}],
+ ['wa','stand',0,1,'shoulders legs breath','ยืนกางขากว้าง กางแขน','Wide stance, arms spread',
+  'แยกเท้ากว้าง กางแขนระดับไหล่ เหยียดปลายนิ้วออกไปทั้งสองข้าง หายใจเต็มอก','Feet wide, arms out at shoulder height; reach through both hands and breathe into the whole chest.',{...STAND,Rt:-22,Lt:22,Ru:90,Rf:0,Lu:-90,Lf:0}],
+ ['tg','stand',1,2,'side legs hips','ยืนกางขา มือหนึ่งแตะแข้ง อีกแขนชี้ฟ้า','Wide stance, one hand to the shin, the other arm up',
+  'แยกเท้ากว้าง เอนลำตัวไปด้านข้าง มือล่างแตะแข้ง แขนบนชี้ขึ้นฟ้า แขนทั้งสองเป็นเส้นตรง','Feet wide, tip the upper body sideways, lower hand to the shin, upper arm to the sky, both arms in one line.',{...STAND,Rt:-26,Lt:26,torso:50,head:12,Ru:130,Rf:0,Lu:-50,Lf:0}],
+ ['lg','stand',1,2,'legs hips','ยืนย่อเข่าข้างเดียว','Side lunge onto a bent knee',
+  'ก้าวเท้ากว้าง ย่อเข่าข้างหนึ่ง อีกขาเหยียดตรง','Step wide, bend one knee, keep the other leg straight.',{...STAND,torso:6,Rt:-45,Rs:45,Lt:32,Ls:0,Ru:150,Rf:-15,Lu:-172,Lf:0}],
+ ['sq','stand',0,2,'hips legs','นั่งยองเข่ากว้าง','Wide squat, palms joined',
+  'แยกเท้ากว้าง ย่อตัวลง เข่าชี้ออกด้านข้าง พนมมือระดับอก','Feet wide, sink down, knees out to the sides, palms joined at the chest.',{...STAND,Rt:-80,Rs:80,Lt:80,Ls:-80,...PRAY}],
+ ['kp','stand',1,2,'balance legs hips','ยืนขาเดียว ประนมมือ','One leg, knee raised, palms joined',
+  'ยืนขาเดียว ยกเข่าอีกข้างขึ้น พนมมือระดับอก','Stand on one leg, raise the other knee, palms joined at the chest.',{...STAND,Rt:0,Lt:70,Ls:-90,...PRAY}],
+ ['tr','stand',1,2,'balance legs hips','ยืนขาเดียว เท้าแนบต้นขา พนมมือเหนือศีรษะ','One leg, foot to the inner thigh, palms overhead',
+  'ยืนขาเดียว วางฝ่าเท้าอีกข้างไว้ด้านในต้นขาหรือน่อง ไม่วางบนเข่า พนมมือขึ้นเหนือศีรษะ','Stand on one leg and set the other sole on the inner thigh or calf, not on the knee. Join the palms overhead.',{...STAND,Rt:-2,Lt:62,Ls:-150,...UP}],
+ ['lr','stand',1,2,'balance hips legs','ยืนยกขาไปด้านข้าง','Leg lifted to the side',
+  'กางแขนช่วยทรงตัว ยกขาข้างหนึ่งออกไปด้านข้าง เข่าตึง ปลายเท้าชี้ไปข้างหน้า','Arms out for balance; lift one straight leg out to the side, toes facing forward.',{...STAND,torso:8,Rt:-3,Lt:42,Ru:95,Rf:0,Lu:-95,Lf:0}],
+ ['fl','stands',0,2,'back legs','ยืนก้มตัว ปล่อยแขนลง','Standing forward fold',
+  'งอเข่าเล็กน้อย ก้มตัวจากสะโพก ปล่อยศีรษะและแขนห้อยลงตามน้ำหนัก แล้วค่อยๆ ม้วนตัวขึ้น','Soften the knees, fold from the hips, let the head and arms hang. Roll up slowly.',{...STANDS,torso:112,head:18,Rt:-4,Rs:8,Lt:-4,Ls:8,Ru:62,Rf:-10,Lu:66,Lf:-10}],
+ ['bb','stands',0,2,'back shoulders breath','ยืนแอ่นหลัง ยกแขนเหนือศีรษะ','Gentle backbend, arms overhead',
+  'ยืนเท้าชิด ยกแขนขึ้น หายใจเข้า แอ่นอกขึ้นและไปด้านหลังเล็กน้อย สะโพกดันไปข้างหน้า','Feet together, arms up. Breathe in and lift the chest up and slightly back, hips easing forward.',{...STANDS,torso:-18,head:-12,pelvis:-4,Ru:4,Rf:0,Lu:6,Lf:0}],
+ ['qd','stands',1,2,'legs hips balance','ยืนขาเดียว จับข้อเท้าไว้ด้านหลัง','One leg, the other foot held behind',
+  'ยืนขาเดียว พับขาอีกข้างไปด้านหลัง มือจับข้อเท้า เข่าชี้ลงพื้น แขนอีกข้างยื่นไปข้างหน้า','Stand on one leg, fold the other back and hold the ankle, knee pointing down, the free arm reaching forward.',{...STANDS,torso:6,Lt:24,Ls:160,Lu:188,Lf:0,Ru:95,Rf:-10}],
+ ['lu','stands',1,3,'legs hips','ก้าวเท้ายาว ย่อเข่าหน้า ยกแขน','Long step forward, front knee bent, arms up',
+  'ก้าวเท้ายาวไปข้างหน้า ย่อเข่าหน้าให้อยู่เหนือข้อเท้า ขาหลังเหยียด ยกแขนขึ้นเหนือศีรษะ','Take a long step, bend the front knee over the ankle, keep the back leg long, arms overhead.',{...STANDS,Rt:-60,Rs:62,Lt:40,Ls:0,Ru:4,Rf:0,Lu:6,Lf:0}],
+ ['ch','stands',0,3,'legs back','ย่อเข่าเหมือนนั่งเก้าอี้','Half squat, as if sitting on a chair',
+  'ยืนเท้าชิด ย่อเข่า ดันสะโพกไปด้านหลังเหมือนจะนั่งเก้าอี้ ยกแขนขึ้นตามแนวลำตัว','Feet together, bend the knees and send the hips back as if to sit, arms rising in line with the body.',{...STANDS,torso:28,Rt:-55,Rs:80,Lt:-55,Ls:80,Ru:-10,Rf:0,Lu:-8,Lf:0}],
+ ['kw','kneel',0,1,'breath','นั่งคุกเข่าบนส้นเท้า ไหว้','Kneeling on the heels, hands in a wai',
+  'นั่งทับส้นเท้า หลังตรง พนมมือไหว้ระดับหน้า หายใจช้าๆ','Sit back on the heels, back tall, palms joined at the face in a wai. Breathe slowly.',{...KNEEL,Ru:160,Rf:-147,Lu:160,Lf:-147}],
+ ['kb','kneel',0,1,'back shoulders hips','คุกเข่า ก้มกราบ เหยียดแขน','Kneeling bow, arms reaching forward',
+  'จากท่านั่งทับส้นเท้า ก้มตัวลงไปข้างหน้า เหยียดแขนไปบนพื้น หน้าผากลงใกล้พื้น สะโพกอยู่บนส้นเท้า','From sitting on the heels, fold forward with the arms long on the floor, forehead toward the floor, hips staying on the heels.',{...KNEEL,torso:86,head:-12,Ru:6,Rf:0,Lu:6,Lf:0}],
+ ['ku','kneel',0,1,'side shoulders hips','ยืนบนเข่า ยกแขนขึ้น','Tall kneeling, arms up',
+  'ยกตัวขึ้นยืนบนเข่า สะโพกตรงเหนือเข่า ยกแขนขึ้นเหนือศีรษะ ยืดตัวขึ้น','Rise to stand on the knees, hips over the knees, arms overhead, lengthen up.',{...KNEEL,torso:-4,Rt:2,Rs:90,Lt:2,Ls:90,Ru:4,Rf:0,Lu:6,Lf:0}],
+ ['kl','kneel',1,2,'hips legs','คุกเข่าข้างเดียว ก้าวเท้าหน้า ยกแขน','Low lunge, back knee down, arms up',
+  'ก้าวเท้าหนึ่งไปข้างหน้า วางเข่าหลังบนพื้น ดันสะโพกลงและไปข้างหน้า ยกแขนขึ้น','Step one foot forward with the back knee on the floor; sink the hips forward and down, arms up.',{...KNEEL,Rt:-80,Rs:80,Lt:6,Ls:84,Ru:4,Rf:0,Lu:6,Lf:0}],
+ ['kt','kneel',0,1,'back neck','คลานสี่ขา ก้มศีรษะ','On hands and knees, head dropped',
+  'วางมือใต้ไหล่ เข่าใต้สะโพก หายใจออก ก้มศีรษะ โก่งหลังขึ้นเหมือนแมว','Hands under the shoulders, knees under the hips. Breathe out, drop the head and round the back like a cat.',{...KNEEL,torso:72,head:38,Rt:0,Rs:90,Lt:0,Ls:90,Ru:108,Rf:0,Lu:108,Lf:0}],
+ ['lw','supine',0,1,'side shoulders back','นอนหงาย เหยียดตัวยาว','Lying on the back, whole-body stretch',
+  'นอนหงาย ยกแขนไปเหนือศีรษะวางบนพื้น เหยียดปลายมือและปลายเท้าออกจากกัน','Lie on the back, arms overhead on the floor; reach the hands and the feet away from each other.',{...SUPINE,Ru:2,Rf:0,Lu:4,Lf:0}],
+ ['lk','supine',1,1,'hips back','นอนหงาย ดึงเข่าชิดอก','Lying, one knee drawn to the chest',
+  'นอนหงาย งอเข่าข้างหนึ่ง ใช้มือดึงเข่าเข้าหาอก อีกขาเหยียดยาวบนพื้น','Lie on the back, bend one knee and draw it to the chest with the hands; the other leg stays long on the floor.',{...SUPINE,Rt:-135,Rs:130,Ru:107,Rf:73,Lu:110,Lf:70}],
+ ['ll','supine',0,2,'legs back','นอนหงาย ยกขาตั้งฉาก','Lying, both legs raised straight up',
+  'นอนหงาย แขนวางข้างลำตัว ยกขาทั้งสองขึ้นตั้งฉากกับพื้น ปลายเท้ากระดกเข้าหาตัว','Lie on the back, arms by the sides; raise both legs straight up, toes drawn toward you.',{...SUPINE,Rt:-90,Lt:-90}],
+ ['br','supine',0,2,'back hips legs','นอนหงาย ยกสะโพก','Lying, hips lifted',
+  'นอนหงาย ชันเข่า เท้าวางบนพื้น หายใจเข้ายกสะโพกขึ้น ไหล่และเท้ายังอยู่บนพื้น','Lie on the back, knees bent, feet on the floor. Breathe in and lift the hips; the shoulders and feet stay down.',{...SUPINE,torso:-115,Rt:-15,Rs:105,Lt:-15,Ls:105,Ru:205,Rf:0,Lu:205,Lf:0}],
+ ['sp','prone',0,1,'back breath','นอนคว่ำ ท้าวศอก ยกอก','Lying face down, up on the forearms',
+  'นอนคว่ำ วางศอกใต้ไหล่ แขนท่อนล่างวางบนพื้น ยกอกขึ้น คอยาว','Lie face down, elbows under the shoulders, forearms on the floor; lift the chest, neck long.',{...PRONE,torso:75,head:-30,Ru:75,Rf:-58,Lu:75,Lf:-58}],
+ ['pl','prone',1,2,'back hips legs','นอนคว่ำ ยกขาทีละข้าง','Lying face down, one leg lifted',
+  'นอนคว่ำ เหยียดแขนไปข้างหน้า ยกขาข้างหนึ่งขึ้นจากพื้น เข่าตึง สะโพกแนบพื้น','Lie face down, arms long in front; lift one straight leg, hips staying on the floor.',{...PRONE,Ru:2,Rf:0,Lu:2,Lf:0,Rt:-22}],
+ ['sw','prone',0,3,'back legs shoulders','นอนคว่ำ ยกแขนยกขา','Lying face down, arms and legs lifted',
+  'นอนคว่ำ เหยียดแขนไปข้างหน้า หายใจเข้ายกแขน อก และขาขึ้นพร้อมกัน สายตามองพื้น','Lie face down, arms forward. Breathe in and lift the arms, chest and legs together, eyes on the floor.',{...PRONE,torso:80,head:-6,Ru:-12,Rf:0,Lu:-10,Lf:0,Rt:-16,Lt:-14}],
+].map(([id,base,two,lv,areas,th,en,cth,cen,p,back])=>{const [rest,side,fam]=BASES[base];
+  const o={id,base,two:!!two,lv,areas:areas.split(' '),th,en,cth,cen,side,fam,back:!!back,rest:withCx({...rest},side),p:withCx({...p},side)};
+  o.m=o.two?withCx(mirror(o.p,side),side):null;
+  const bs=[o.rest,o.p,o.m].filter(Boolean).map(q=>bbox(placed(q,side)));
+  o.fitW=Math.max(...bs.map(b=>b.w));o.fitH=Math.max(...bs.map(b=>b.h));return o});
+const BY=Object.fromEntries(POSES.map(p=>[p.id,p]));
+const FAMS={seat:['นั่ง','Seated'],stand:['ยืน','Standing'],kneel:['คุกเข่า','Kneeling'],lie:['นอน','Lying']};
+const AREAS={neck:['คอ','Neck'],shoulders:['ไหล่','Shoulders'],arms:['แขน มือ','Arms, hands'],eyes:['ตา หน้า','Eyes, face'],side:['สีข้าง เอว','Sides, waist'],back:['หลัง','Back'],hips:['สะโพก','Hips'],legs:['ขา เข่า','Legs, knees'],balance:['ทรงตัว','Balance'],breath:['ลมหายใจ','Breath']};
+const LEVELS={1:['เบา','Gentle'],2:['กลาง','Steady'],3:['หนัก','Strong']};
+const ids=f=>POSES.filter(f).map(p=>p.id);
+const PRESETS=[
+ {id:'desk',th:'พักโต๊ะ',en:'Desk break',ids:['nk','sh','eb','ac','cl','ey','pr']},
+ {id:'morning',th:'ตื่นเช้า',en:'Morning',ids:['rc','ar','hs','wa','tg','fl','ch','tr']},
+ {id:'night',th:'ก่อนนอน',en:'Before sleep',ids:['kw','kb','kt','lk','ll','lw']},
+ {id:'seated',th:'ชุดนั่ง',en:'Seated',ids:ids(p=>p.fam==='seat')},
+ {id:'standing',th:'ชุดยืน',en:'Standing',ids:ids(p=>p.fam==='stand')},
+ {id:'floor',th:'ชุดพื้น',en:'On the floor',ids:ids(p=>p.fam==='kneel'||p.fam==='lie')},
+ {id:'all',th:'ครบทุกท่า',en:'Every position',ids:POSES.map(p=>p.id)},
+];
+
+/* ================================================================ the drawing
+   Paper cut and gold leaf on black lacquer (the doodler's paper(): a fill, its shadow,
+   fibre grain, a light cut edge), inside a Lanna niche: kranok flames up the arch, a lotus
+   plinth, tung flags, gold motes. The niche's colour names the posture. */
+const TAU=Math.PI*2;
+const FAMC={seat:['#7c2619','#2c0b07'],stand:['#263f7c','#0c1430'],kneel:['#1f6650','#08251d'],lie:['#5e3270','#200f29']};
+const GOLD='#d9ab47',GOLD2='#f2d27a',GOLD3='#a77b26';
+function rnd(seed){return()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
+let GRAIN=null;
+function grainTile(){if(GRAIN)return GRAIN;const g=document.createElement('canvas');g.width=g.height=96;const x=g.getContext('2d'),im=x.createImageData(96,96),r=rnd(7);
+  for(let i=0;i<im.data.length;i+=4){const v=r()*255;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=r()<.55?16:0}x.putImageData(im,0,0);return GRAIN=g}
+function paper(c,path,fill,lift,W){c.save();c.shadowColor='rgba(0,0,0,.5)';c.shadowBlur=W*.004*(1+lift);c.shadowOffsetX=W*.0015*(1+lift);c.shadowOffsetY=W*.0025*(1+lift);
+  c.fillStyle=fill;path(c);c.fill();c.restore();c.save();c.fillStyle=c.createPattern(grainTile(),'repeat');path(c);c.fill();
+  c.strokeStyle='rgba(255,240,200,.18)';c.lineWidth=Math.max(.6,W*.0012);path(c);c.stroke();c.restore()}
+const polyPath=pts=>q=>{q.beginPath();pts.forEach((p,i)=>i?q.lineTo(p[0],p[1]):q.moveTo(p[0],p[1]));q.closePath()};
+function bez(p0,p1,p2,p3,t){const u=1-t;return[u*u*u*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t*t*t*p3[0],u*u*u*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t*t*t*p3[1]]}
+function geom(W){
+  const x0=W*.16,x1=W*.84,xm=W/2,ys=W*.43,ya=W*.075,yb=W*.785,w=xm-x0,h=ys-ya;
+  const left=[],right=[];for(let i=0;i<=40;i++){const t=i/40;left.push(bez([x0,ys],[x0,ys-.62*h],[xm-.13*w,ya+.3*h],[xm,ya],t))}
+  for(let i=left.length-2;i>=0;i--)right.push([2*xm-left[i][0],left[i][1]]);
+  const out=[[x0,yb],...left,...right,[x1,yb]];
+  return {x0,x1,xm,ys,ya,yb,out,left,curveA:1,curveB:out.length-2};
+}
+function offset(pts,d){return pts.map((p,i)=>{const a=pts[Math.max(0,i-1)],b=pts[Math.min(pts.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1;return[p[0]+dy/l*d,p[1]-dx/l*d]})}
+function strokePts(c,pts){c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]))}
+/* ดอกประจำยาม, the four-petal flower: r = s·|cos 2φ|^0.7 */
+function prajam(c,x,y,s){c.beginPath();for(let i=0;i<=64;i++){const f=i/64*TAU,r=s*Math.pow(Math.abs(Math.cos(2*f)),.7);i?c.lineTo(x+Math.cos(f)*r,y+Math.sin(f)*r):c.moveTo(x+r,y)}c.fill();
+  c.beginPath();c.arc(x,y,s*.16,0,TAU);c.fill()}
+/* a kranok flame at p, rising along n and leaning toward u */
+function flame(c,p,n,u,s){const P=(a,b)=>[p[0]+n[0]*a+u[0]*b,p[1]+n[1]*a+u[1]*b];
+  const b1=P(0,-s*.45),b2=P(0,s*.45),tip=P(s*1.35,s*.6);
+  return q=>{q.beginPath();q.moveTo(...b1);q.quadraticCurveTo(...P(s*.95,-s*.3),...tip);q.quadraticCurveTo(...P(s*.5,s*.6),...P(s*.42,s*.18));
+    q.quadraticCurveTo(...P(s*.2,s*.5),...b2);q.closePath()}}
+function petal(c,x,yb,w,h){return q=>{q.beginPath();q.moveTo(x-w/2,yb);q.quadraticCurveTo(x-w/2,yb-h*.75,x,yb-h);q.quadraticCurveTo(x+w/2,yb-h*.75,x+w/2,yb);q.closePath()}}
+function diamonds(c,x0,x1,y,s){c.beginPath();for(let x=x0+s;x<x1-s/2;x+=s*2.2){c.moveTo(x,y-s);c.lineTo(x+s,y);c.lineTo(x,y+s);c.lineTo(x-s,y);c.closePath()}c.fill()}
+
+const STATIC={};
+function staticLayer(W,fam,full){
+  const key=W+fam+full;if(STATIC[key])return STATIC[key];
+  const cv=document.createElement('canvas');cv.width=cv.height=W;const c=cv.getContext('2d'),G=geom(W),F=FAMC[fam];
+  let g=c.createRadialGradient(W*.5,W*.42,W*.05,W*.5,W*.5,W*.78);g.addColorStop(0,'#2d1e17');g.addColorStop(1,'#0d0807');c.fillStyle=g;c.fillRect(0,0,W,W);
+  c.fillStyle=c.createPattern(grainTile(),'repeat');c.fillRect(0,0,W,W);
+  /* lai rod nam: gold flowers stencilled over the lacquer */
+  const st=W/7.5;c.fillStyle='rgba(217,171,71,.15)';
+  for(let j=-1;j<9;j++)for(let i=-1;i<9;i++)prajam(c,(i+(j%2?.5:0))*st,j*st*.87,st*.16);
+  if(full){c.fillStyle='rgba(217,171,71,.12)';for(let j=-1;j<9;j++)for(let i=-1;i<9;i++){const x=(i+(j%2?0:.5))*st,y=j*st*.87;c.beginPath();c.arc(x,y,st*.03,0,TAU);c.fill()}}
+  /* pilasters */
+  for(const [xa,xb] of [[G.x0-W*.05,G.x0-W*.012],[G.x1+W*.012,G.x1+W*.05]]){
+    paper(c,polyPath([[xa,G.ys],[xb,G.ys],[xb,G.yb],[xa,G.yb]]),F[1],1,W);
+    c.strokeStyle=GOLD;c.lineWidth=W*.002;c.strokeRect(xa+W*.004,G.ys+W*.004,xb-xa-W*.008,G.yb-G.ys-W*.008);
+    c.fillStyle=GOLD;const xm=(xa+xb)/2;for(let y=G.ys+W*.03;y<G.yb-W*.02;y+=W*.035){c.beginPath();c.moveTo(xm,y-W*.009);c.lineTo(xm+W*.007,y);c.lineTo(xm,y+W*.009);c.lineTo(xm-W*.007,y);c.closePath();c.fill()}
+    for(let k=0;k<3;k++)paper(c,petal(c,xm+(k-1)*(xb-xa)*.32,G.ys+W*.004,(xb-xa)*.42,W*.026),k===1?GOLD2:GOLD,.5,W);
+  }
+  /* the niche */
+  g=c.createRadialGradient(G.xm,G.ys*.95,W*.03,G.xm,G.ys,W*.5);g.addColorStop(0,F[0]);g.addColorStop(1,F[1]);
+  paper(c,polyPath(G.out),g,2,W);
+  c.save();c.globalAlpha=.09;c.fillStyle=GOLD;polyPath(G.out)(c);c.clip();const s2=W/14;
+  for(let j=0;j<14;j++)for(let i=0;i<14;i++)prajam(c,(i+(j%2?.5:0))*s2,j*s2*.87,s2*.14);c.restore();
+  c.strokeStyle='rgba(242,210,122,.55)';c.lineWidth=Math.max(.7,W*.0016);strokePts(c,offset(G.out,-W*.014));c.stroke();
+  /* gold band, beads, flames */
+  c.lineJoin='round';c.strokeStyle=GOLD3;c.lineWidth=W*.02;strokePts(c,offset(G.out,W*.012));c.stroke();
+  c.strokeStyle=GOLD;c.lineWidth=W*.013;strokePts(c,offset(G.out,W*.012));c.stroke();
+  c.strokeStyle=GOLD2;c.lineWidth=Math.max(.6,W*.002);strokePts(c,offset(G.out,W*.008));c.stroke();
+  const arch=G.out.slice(G.curveA,G.curveB+1),beads=offset(arch,W*.03),base=offset(arch,W*.04);
+  if(full){c.fillStyle=GOLD;let acc=0;for(let i=1;i<beads.length;i++){acc+=Math.hypot(beads[i][0]-beads[i-1][0],beads[i][1]-beads[i-1][1]);if(acc>W*.019){acc=0;c.beginPath();c.arc(beads[i][0],beads[i][1],W*.0045,0,TAU);c.fill()}}}
+  const half=Math.floor(base.length/2);let acc=0;
+  for(let i=2;i<base.length-2;i++){acc+=Math.hypot(base[i][0]-base[i-1][0],base[i][1]-base[i-1][1]);if(acc<W*(full?.045:.07)||Math.abs(i-half)<2)continue;acc=0;
+    const a=base[i-1],b=base[i+1],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy),tan=i<half?[dx/l,dy/l]:[-dx/l,-dy/l],n=[dy/l,-dx/l],k=1-Math.abs(i-half)/half;
+    paper(c,flame(c,base[i],n,tan,W*(.018+.02*k)),i%2?GOLD:GOLD2,.6,W)}
+  /* the crest at the apex: three tiers of flame and a bud */
+  const ap=base[half];for(let k=0;k<3;k++){const s=W*(.05-k*.012),y=ap[1]-k*W*.035;
+    paper(c,flame(c,[ap[0]-s*.1,y],[0,-1],[-1,0],s*.9),GOLD,1,W);paper(c,flame(c,[ap[0]+s*.1,y],[0,-1],[1,0],s*.9),GOLD,1,W)}
+  paper(c,q=>{q.beginPath();q.ellipse(ap[0],ap[1]-W*.12,W*.012,W*.022,0,0,TAU)},GOLD2,1,W);
+  /* the lotus plinth: upturned petals, a band of diamonds, downturned petals, a step */
+  const px0=G.x0-W*.075,px1=G.x1+W*.075,y=G.yb,pw=W*.046;
+  paper(c,polyPath([[px0+W*.02,y+W*.105],[px1-W*.02,y+W*.105],[px1,y+W*.13],[px0,y+W*.13]]),'#3a2418',1,W);
+  paper(c,polyPath([[px0+W*.01,y+W*.05],[px1-W*.01,y+W*.05],[px1-W*.01,y+W*.074],[px0+W*.01,y+W*.074]]),F[1],1,W);
+  c.fillStyle=GOLD;diamonds(c,px0+W*.01,px1-W*.01,y+W*.062,W*.006);
+  for(let x=px0+pw*.7;x<px1-pw*.4;x+=pw)paper(c,q=>{q.beginPath();q.moveTo(x-pw/2,y+W*.074);q.quadraticCurveTo(x-pw/2,y+W*.074+W*.03,x,y+W*.106);q.quadraticCurveTo(x+pw/2,y+W*.074+W*.03,x+pw/2,y+W*.074);q.closePath()},F[0],.6,W);
+  for(let x=px0+pw*.2;x<px1;x+=pw)paper(c,petal(c,x,y+W*.05,pw*.9,W*.04),GOLD3,.4,W);
+  for(let x=px0+pw*.7;x<px1-pw*.4;x+=pw){paper(c,petal(c,x,y+W*.05,pw,W*.044),F[0],.8,W);
+    c.strokeStyle=GOLD;c.lineWidth=Math.max(.6,W*.0018);petal(c,x,y+W*.05,pw*.55,W*.03)(c);c.stroke()}
+  paper(c,polyPath([[px0,y-W*.003],[px1,y-W*.003],[px1,y+W*.009],[px0,y+W*.009]]),GOLD,1.2,W);
+  return STATIC[key]=cv;
+}
+
+/* ---- the hermit ---- */
+const SKIN='#e6c194',SKIN2='#c39465',LINE='#3e170e',CLOTH='#cf8a33',STRIPE='#2b170d',BEARD='#f1e9d6';
+function cap(c,a,b,ra,rb){const ang=Math.atan2(b[1]-a[1],b[0]-a[0]),n=[-Math.sin(ang),Math.cos(ang)];
+  c.beginPath();c.moveTo(a[0]+n[0]*ra,a[1]+n[1]*ra);c.lineTo(b[0]+n[0]*rb,b[1]+n[1]*rb);c.arc(b[0],b[1],rb,ang+Math.PI/2,ang-Math.PI/2,true);
+  c.lineTo(a[0]-n[0]*ra,a[1]-n[1]*ra);c.arc(a[0],a[1],ra,ang-Math.PI/2,ang+Math.PI/2,true);c.closePath()}
+function shape(c,fill,lw,path){path();c.fillStyle=fill;c.fill();if(lw){c.strokeStyle=LINE;c.lineWidth=lw;c.stroke()}}
+function drawHermit(c,p,side,o){
+  const P=placed(p,side),S=o.S,X=q=>[o.ox+(q[0]-o.cx)*S,o.fy-q[1]*S],lw=Math.max(.8,S*.06),sc=v=>v*S;
+  const V=(a,b)=>{const d=[b[0]-a[0],b[1]-a[1]],l=Math.hypot(d[0],d[1])||1;return[d[0]/l,d[1]/l]};
+  const ut=dir(P.t),front=dir(P.ha+90);
+  const band=(a,b,u,r)=>{const m=X(mid(a,b,u)),d=V(X(a),X(b)),n=[-d[1],d[0]];c.strokeStyle=GOLD;c.lineWidth=Math.max(1,S*.09);c.beginPath();c.moveTo(m[0]+n[0]*r,m[1]+n[1]*r);c.lineTo(m[0]-n[0]*r,m[1]-n[1]*r);c.stroke()};
+  function leg(s,far){const col=far?SKIN2:SKIN,H=X(P[s+'hip']),K=X(P[s+'kn']),A=X(P[s+'an']);
+    shape(c,col,lw,()=>cap(c,H,K,sc(.36),sc(.27)));shape(c,col,lw,()=>cap(c,K,A,sc(.26),sc(.18)));
+    const sd=dir(P[s+'b2']),fd=side?dir(P[s+'b2']-90):dir(P[s+'b2']+(s==='R'?-90:90)),fc=X(add(add(P[s+'an'],sd,.08),fd,side?.26:.13));
+    shape(c,col,lw,()=>{c.beginPath();c.ellipse(fc[0],fc[1],sc(side?.34:.24),sc(.13),Math.atan2(-fd[1],fd[0]),0,TAU)});
+    band(P[s+'kn'],P[s+'an'],.86,sc(.21))}
+  function arm(s,far){const col=far?SKIN2:SKIN,Sh=X(P[s+'sho']),E=X(P[s+'elb']),Wr=X(P[s+'wr']);
+    shape(c,col,lw,()=>cap(c,Sh,E,sc(.25),sc(.2)));shape(c,col,lw,()=>cap(c,E,Wr,sc(.19),sc(.14)));
+    band(P[s+'sho'],P[s+'elb'],.3,sc(.25));band(P[s+'elb'],P[s+'wr'],.86,sc(.16))}
+  function hands(list,far){const joined=Math.hypot(P.Rwr[0]-P.Lwr[0],P.Rwr[1]-P.Lwr[1])<.5;
+    if(joined&&list.length===2){const m=mid(P.Rwr,P.Lwr),d=V([0,0],add(dir(P.Ra2),dir(P.La2))),n=[-d[1],d[0]],Q=(a,b)=>X([m[0]+d[0]*a+n[0]*b,m[1]+d[1]*a+n[1]*b]);
+      shape(c,SKIN,lw,()=>{c.beginPath();c.moveTo(...Q(-.1,0));c.quadraticCurveTo(...Q(.3,.3),...Q(.72,0));c.quadraticCurveTo(...Q(.3,-.3),...Q(-.1,0));c.closePath()});
+      c.strokeStyle=GOLD;c.lineWidth=Math.max(.8,S*.05);c.beginPath();c.moveTo(...Q(0,0));c.lineTo(...Q(.6,0));c.stroke();return}
+    for(const s of list){const d=dir(P[s+'a2']),hc=X(add(P[s+'wr'],d,.2));shape(c,far?SKIN2:SKIN,lw,()=>{c.beginPath();c.ellipse(hc[0],hc[1],sc(.24),sc(.14),Math.atan2(-d[1],d[0]),0,TAU)})}}
+  function cloth(){const pel=P.pel,clip=[];let pts;
+    if(!side){const q=dir(P.pv+90),Wr=add(add(pel,q,.66),ut,.38),Wl=add(add(pel,q,-.66),ut,.38);
+      const hem=s=>{const H=P[s+'hip'],K=P[s+'kn'],m=mid(H,K,.55),d=V(H,K);let n=[-d[1],d[0]];const out=s==='R'?q:[-q[0],-q[1]];if(n[0]*out[0]+n[1]*out[1]<0)n=[-n[0],-n[1]];
+        return [add(m,n,.36),add(add(m,n,.12),d,.12),add(add(m,n,-.1),d,-.04),add(m,n,-.32)]};
+      const r=hem('R'),l=hem('L');pts=[Wr,...r,add(pel,ut,-.42),...l.reverse(),Wl]}
+    else{const H=P.Rhip,K=P.Rkn,m=mid(H,K,.6),d=V(H,K);let n=[-d[1],d[0]];if(n[0]*front[0]+n[1]*front[1]<0)n=[-n[0],-n[1]];
+      pts=[add(add(pel,front,.58),ut,.42),add(m,n,.38),add(add(m,n,.12),d,.14),add(add(m,n,-.12),d,-.02),add(m,n,-.38),add(add(pel,front,-.62),ut,-.1),add(add(pel,front,-.56),ut,.42)]}
+    const sp=pts.map(X);shape(c,CLOTH,lw,()=>polyPath(sp)(c));
+    c.save();polyPath(sp)(c);c.clip();c.strokeStyle=STRIPE;c.lineCap='round';
+    const along=side?front:dir(P.pv+90);for(let k=-4;k<=3;k++){const base=add(pel,ut,k*.3+.1);c.lineWidth=Math.max(1,S*(.08+.03*(k&1)));c.beginPath();
+      for(let j=0;j<=12;j++){const f=(j/12-.5)*3.4,q=add(add(base,along,f),ut,.07*Math.sin(f*4+k)),Q=X(q);j?c.lineTo(...Q):c.moveTo(...Q)}c.stroke()}
+    c.restore();
+    const w1=X(pts[0]),w2=X(pts[pts.length-1]);c.strokeStyle=GOLD;c.lineWidth=Math.max(1.2,S*.15);c.lineCap='round';c.beginPath();c.moveTo(...w1);c.lineTo(...w2);c.stroke()}
+  function torso(){const T=X(P.pel),N=X(P.neck);c.save();
+    const parts=()=>{const ps=[];if(side){ps.push(()=>cap(c,T,N,sc(.5),sc(.46)))}else{ps.push(()=>cap(c,T,N,sc(.62),sc(.6)));ps.push(()=>cap(c,X(P.Rsho),X(P.Lsho),sc(.3),sc(.3)))}
+      ps.push(()=>cap(c,N,X(P.head),sc(.21),sc(.2)));return ps};
+    c.strokeStyle=LINE;c.lineWidth=lw*2;for(const f of parts()){f();c.stroke()}c.fillStyle=SKIN;for(const f of parts()){f();c.fill()}c.restore();
+    if(!side){c.strokeStyle='rgba(62,23,14,.35)';c.lineWidth=Math.max(.6,S*.035);const ch=add(P.neck,ut,-.8);for(const g of [1,-1]){const a=add(ch,dir(P.t+90),g*.08),b=add(add(ch,dir(P.t+90),g*.55),ut,-.15);c.beginPath();c.moveTo(...X(a));c.quadraticCurveTo(...X(add(mid(a,b),ut,-.2)),...X(b));c.stroke()}}}
+  function mala(){if(side)return;const A=mid(P.neck,P.Rsho,.55),B=mid(P.neck,P.Lsho,.55),down=[-ut[0],-ut[1]],a=1.4,ch=Math.cosh(a)-1;
+    const at=s=>add(mid(A,B,s),down,.95*(1-(Math.cosh(a*(2*s-1))-1)/ch));
+    for(let i=0;i<=16;i++){const q=X(at(i/16));c.fillStyle=i%2?GOLD:'#4a2a18';c.beginPath();c.arc(q[0],q[1],Math.max(1,S*.075),0,TAU);c.fill()}
+    const b=X(at(.5));c.fillStyle=GOLD2;c.beginPath();c.arc(b[0],b[1]+S*.1,Math.max(1.4,S*.12),0,TAU);c.fill()}
+  function head(){const H=P.head,u=dir(P.ha),r=side?front:dir(P.ha-90),at=(k,sd)=>X([H[0]+u[0]*k+r[0]*sd,H[1]+u[1]*k+r[1]*sd]),hc=X(H);
+    shape(c,SKIN,lw,()=>{c.beginPath();c.arc(hc[0],hc[1],sc(.6),0,TAU)});
+    c.strokeStyle=LINE;c.lineWidth=Math.max(.7,S*.045);c.lineCap='round';
+    if(side){const e=at(.08,.32);c.beginPath();c.arc(e[0],e[1],sc(.09),Math.atan2(-u[1],u[0])+.2,Math.atan2(-u[1],u[0])+2.6,false);c.stroke();
+      shape(c,SKIN,lw,()=>{c.beginPath();c.moveTo(...at(.12,.55));c.lineTo(...at(-.08,.74));c.lineTo(...at(-.18,.56));c.closePath()})}
+    else for(const g of [1,-1]){const e=at(.05,g*.24);c.beginPath();c.arc(e[0],e[1],sc(.1),Math.atan2(u[1],-u[0])-1,Math.atan2(u[1],-u[0])+1);c.stroke()}
+    /* the beard */
+    const bo=side?.28:0;
+    shape(c,BEARD,lw,()=>{c.beginPath();c.moveTo(...at(-.12,bo+.5));c.quadraticCurveTo(...at(-.95,bo+.48),...at(-1.42,bo+.12));c.quadraticCurveTo(...at(-.95,bo-.42),...at(-.12,bo-.5));c.quadraticCurveTo(...at(-.42,bo),...at(-.12,bo+.5));c.closePath()});
+    c.strokeStyle='rgba(62,23,14,.3)';c.lineWidth=Math.max(.5,S*.03);for(const k of [-.2,0,.2]){c.beginPath();c.moveTo(...at(-.55,bo+k));c.quadraticCurveTo(...at(-.9,bo+k*.8),...at(-1.2,bo+k*.3));c.stroke()}
+    /* the hat: tiger skin, a gold brim, ear flaps, a gold bud */
+    const tb=side?-.28:0;
+    for(const g of (side?[-.05]:[1,-1]))shape(c,CLOTH,lw,()=>{c.beginPath();c.moveTo(...at(.36,g*.5+(side?0:g*.1)));c.quadraticCurveTo(...at(-.1,g*.78),...at(-.36,g*.62));c.quadraticCurveTo(...at(-.2,g*.42),...at(.22,g*.42));c.closePath()});
+    const hat=()=>{c.beginPath();c.moveTo(...at(.3,.68));c.quadraticCurveTo(...at(1.05,.56+tb*.4),...at(1.9,tb+.03));c.lineTo(...at(1.9,tb-.03));c.quadraticCurveTo(...at(1.05,-.56+tb*.4),...at(.3,-.68));c.quadraticCurveTo(...at(.22,0),...at(.3,.68));c.closePath()};
+    shape(c,CLOTH,lw,hat);c.save();hat();c.clip();c.strokeStyle=STRIPE;c.lineWidth=Math.max(1,S*.08);
+    for(const k of [.62,.95,1.28,1.6]){c.beginPath();c.moveTo(...at(k+.18,.7));c.lineTo(...at(k,tb*(k/1.9)));c.lineTo(...at(k+.18,-.7));c.stroke()}c.restore();
+    c.strokeStyle=GOLD;c.lineWidth=Math.max(1.5,S*.16);c.beginPath();c.moveTo(...at(.36,.66));c.quadraticCurveTo(...at(.5,0),...at(.36,-.66));c.stroke();
+    const tip=at(2,tb);shape(c,GOLD2,lw*.7,()=>{c.beginPath();c.arc(tip[0],tip[1],sc(.11),0,TAU)})}
+  /* order: what lies behind first */
+  if(side){arm('L',1);hands(['L'],1);leg('L',1);torso();leg('R');cloth();head();arm('R');hands(Math.hypot(P.Rwr[0]-P.Lwr[0],P.Rwr[1]-P.Lwr[1])<.5?['R','L']:['R'])}
+  else{if(o.back){arm('R');arm('L');hands(['R','L'])}leg('R');leg('L');cloth();torso();mala();head();if(!o.back){arm('R');arm('L');hands(['R','L'])}}
+  return P;
+}
+/* the lotus halo breathes: r = R(1 + 0.06 cos 16φ)·(1 + 0.05 b) */
+function halo(c,cx,cy,R,b,W){const g=c.createRadialGradient(cx,cy,R*.1,cx,cy,R*1.3);g.addColorStop(0,`rgba(255,214,120,${.1+.1*b})`);g.addColorStop(1,'rgba(255,214,120,0)');
+  c.fillStyle=g;c.beginPath();c.arc(cx,cy,R*1.3,0,TAU);c.fill();const k=1+.05*b;
+  c.strokeStyle=`rgba(242,210,122,${.45+.2*b})`;c.lineWidth=Math.max(.8,W*.0022);c.beginPath();
+  for(let i=0;i<=256;i++){const f=i/256*TAU,r=R*k*(1+.06*Math.cos(16*f));i?c.lineTo(cx+Math.cos(f)*r,cy+Math.sin(f)*r):c.moveTo(cx+r,cy)}c.stroke();
+  c.strokeStyle='rgba(242,210,122,.25)';c.beginPath();c.arc(cx,cy,R*k*.88,0,TAU);c.stroke();
+  c.fillStyle=`rgba(242,210,122,${.5+.3*b})`;for(let i=0;i<16;i++){const f=i/16*TAU,r=R*k*1.1;c.beginPath();c.arc(cx+Math.cos(f)*r,cy+Math.sin(f)*r,Math.max(.8,W*.0028),0,TAU);c.fill()}}
+/* tung: x = A·(y/L)·sin(ky − ωt) */
+const TUNG=['#b8342a','#d9ab47','#efe2c4','#2f7a5b','#d9ab47','#b8342a'];
+function tung(c,W,x,t,k,still){const top=W*.035,Lh=W*.38,w=W*.036,N=14,Lp=[],Rp=[];
+  c.strokeStyle=GOLD;c.lineWidth=Math.max(1,W*.003);c.beginPath();c.moveTo(x-w*.2,top);c.lineTo(x+w*1.2,top);c.stroke();
+  for(let i=0;i<=N;i++){const f=i/N,y=top+2+f*Lh,dx=still?0:Math.sin(f*5-t/700+k)*f*w*.55+Math.sin(t/1900+k)*f*w*.25;Lp.push([x+dx,y]);Rp.push([x+w+dx,y])}
+  for(let i=0;i<N;i++){const a=Lp[i],b=Rp[i],cc=Rp[i+1],d=Lp[i+1];c.fillStyle=TUNG[Math.floor(i/2)%TUNG.length];c.beginPath();c.moveTo(...a);c.lineTo(...b);c.lineTo(cc[0],cc[1]+.6);c.lineTo(d[0],d[1]+.6);c.closePath();c.fill();
+    if(i%2){const mx=(a[0]+b[0]+cc[0]+d[0])/4,my=(a[1]+d[1])/2,z=w*.17;c.fillStyle='rgba(20,10,8,.45)';c.beginPath();c.moveTo(mx,my-z);c.lineTo(mx+z,my);c.lineTo(mx,my+z);c.lineTo(mx-z,my);c.closePath();c.fill()}}
+  const e=Lp[N],g=Rp[N];c.fillStyle=TUNG[0];c.beginPath();c.moveTo(...e);c.lineTo(e[0]-w*.1,e[1]+w*.9);c.lineTo((e[0]+g[0])/2,e[1]+w*.3);c.lineTo(g[0]+w*.1,g[1]+w*.9);c.lineTo(...g);c.closePath();c.fill()}
+function motes(c,W,t,still){const r=rnd(11);for(let i=0;i<9;i++){const bx=W*(.08+r()*.84),by=W*(.08+r()*.62),ph=r()*TAU,sp=.6+r();
+  const x=bx+(still?0:Math.sin(t/2400*sp+ph)*W*.012),y=by+(still?0:Math.cos(t/3100*sp+ph)*W*.008),a=still?.5:Math.pow(Math.abs(Math.sin(t/1100*sp+ph)),3),z=W*(.004+.004*a);
+  c.fillStyle=`rgba(255,220,120,${.2+.7*a})`;c.beginPath();c.moveTo(x,y-z*2);c.quadraticCurveTo(x,y,x+z*2,y);c.quadraticCurveTo(x,y,x,y+z*2);c.quadraticCurveTo(x,y,x-z*2,y);c.quadraticCurveTo(x,y,x,y-z*2);c.fill()}}
+
+const FIG={};
+function figLayer(W){if(!FIG[W]){const cv=document.createElement('canvas');cv.width=cv.height=W;FIG[W]=cv}return FIG[W]}
+/* one whole picture: c is a context of W×W device pixels */
+function paint(c,W,pose,p,b,t,o={}){
+  const G=geom(W),still=!!o.still;c.drawImage(staticLayer(W,pose.fam,W>260),0,0);
+  if(!o.thumb){tung(c,W,W*.03,t,0,still);tung(c,W,W*.97-W*.036,t,2,still)}
+  const avW=(G.x1-G.x0)*.86,avH=(G.yb-G.ya)*.84,S=Math.min(W*.066,avW/pose.fitW,avH/pose.fitH);
+  const P=placed(p,pose.side),bb=bbox(P),cx=p.cx||0,hx=W/2+(bb.cx-cx)*S,hy=G.yb-bb.h/2*S;
+  c.save();polyPath(G.out)(c);c.clip();halo(c,hx,hy,Math.min(W*.3,Math.max(bb.w,bb.h)*S*.5),b,W);c.restore();
+  const sh=c.createRadialGradient(hx,G.yb,1,hx,G.yb,bb.w*S*.55);sh.addColorStop(0,'rgba(0,0,0,.45)');sh.addColorStop(1,'rgba(0,0,0,0)');
+  c.save();c.translate(0,G.yb);c.scale(1,.12);c.fillStyle=sh;c.beginPath();c.arc(hx,0,bb.w*S*.55,0,TAU);c.fill();c.restore();
+  const F=figLayer(W),f=F.getContext('2d');f.setTransform(1,0,0,1,0,0);f.clearRect(0,0,W,W);f.lineJoin='round';f.lineCap='round';
+  drawHermit(f,p,pose.side,{S,ox:W/2,fy:G.yb,cx,back:pose.back});
+  f.save();f.globalCompositeOperation='source-atop';f.fillStyle=f.createPattern(grainTile(),'repeat');f.fillRect(0,0,W,W);f.restore();
+  c.save();c.shadowColor='rgba(0,0,0,.55)';c.shadowBlur=S*.3;c.shadowOffsetX=S*.08;c.shadowOffsetY=S*.14;c.drawImage(F,0,0);c.restore();
+  if(!o.thumb)motes(c,W,t,still);
+}
+
+/* ================================================================ state */
+const store={get(k,d){try{const v=localStorage.getItem('lersi.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+             set(k,v){try{localStorage.setItem('lersi.'+k,JSON.stringify(v))}catch(e){}}};
+const clean=a=>(Array.isArray(a)?a:[]).filter(id=>BY[id]);
+const st={rid:store.get('routine','desk'),idx:0,lang:store.get('lang','both'),tab:'practice',
+  mine:clean(store.get('mine',[])),shared:null,single:null,
+  hold:store.get('hold',12),reps:store.get('reps',2),breath:store.get('breath',4),bell:store.get('bell',true),
+  playing:false,t0:0,elapsed:0,q:'',fam:new Set(),area:new Set(),lv:new Set()};
+const $=id=>document.getElementById(id);
+const tr=(th,en)=>st.lang==='th'?th:st.lang==='en'?en:th+' · '+en;
+function routines(){const r=PRESETS.map(p=>({...p}));
+  if(st.mine.length)r.unshift({id:'mine',th:'ชุดของฉัน',en:'My routine',ids:st.mine});
+  if(st.shared)r.unshift({id:'shared',th:'ชุดที่ได้รับ',en:'Sent to me',ids:st.shared});
+  if(st.single)r.unshift({id:'single',th:'ท่านี้',en:'This position',ids:[st.single]});
+  return r}
+const cur=()=>routines().find(r=>r.id===st.rid)||routines().find(r=>r.id==='desk');
+const list=()=>cur().ids.map(id=>BY[id]);
+const poseSecs=p=>(p.two?2:1)*st.reps*(2*st.breath+st.hold+2);
+const mins=ids=>Math.max(1,Math.round(ids.reduce((a,id)=>a+poseSecs(BY[id]),0)/60));
+
+/* a pose run = for each side, for each round: rise (inhale) → hold → release (exhale) → pause */
+function plan(pose){const sides=pose.two?[pose.p,pose.m]:[pose.p],segs=[];
+  sides.forEach((target,si)=>{for(let r=0;r<st.reps;r++)segs.push({k:'rise',d:st.breath,target,si,r},{k:'hold',d:st.hold,target,si,r},{k:'release',d:st.breath,target,si,r},{k:'pause',d:2,target,si,r})});
+  return {segs,sides:sides.length}}
+const ease=u=>u<.5?2*u*u:1-2*(1-u)*(1-u);
+const WORDS={rise:['หายใจเข้า · เข้าท่า','Breathe in · move in'],hold:['ค้างไว้','Hold'],release:['หายใจออก · คลายท่า','Breathe out · release'],pause:['พัก','Rest']};
+function frameAt(pose,t){const pl=plan(pose);let acc=0;
+  for(const s of pl.segs){if(t<acc+s.d){const u=(t-acc)/s.d,r=pose.rest;let p,br;
+      if(s.k==='rise'){p=lerp(r,s.target,ease(u));br=u}
+      else if(s.k==='hold'){p=s.target;const c=((t-acc)%(2*st.breath))/st.breath;br=c<1?c:2-c}
+      else if(s.k==='release'){p=lerp(s.target,r,ease(u));br=1-u}
+      else{p=r;br=0}
+      return {p,br,s,pl,left:Math.ceil(acc+s.d-t)}}
+    acc+=s.d}
+  return null}
+
+/* ================================================================ stage */
+const cv=$('stage'),ctx=cv.getContext('2d');let SW=0;
+function sizeStage(){const d=Math.min(2,window.devicePixelRatio||1),w=Math.round(cv.clientWidth*d);if(w&&w!==SW){SW=w;cv.width=cv.height=w}}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let frame=null;
+function draw(now){sizeStage();if(!SW)return;const pose=list()[st.idx];let p=pose.p,b=.5+.5*Math.sin(now/6000*TAU);
+  if(frame){p=reduce&&frame.s.k!=='pause'?frame.s.target:frame.p;b=frame.br}
+  paint(ctx,SW,pose,p,b,now,{still:reduce})}
+const fmt=v=>(v<0?'−':'')+Math.abs(Math.round(v));
+function mathLine(pose){const p=pose.p,g=k=>fmt(p[k]||0)+'°';
+  $('math').textContent='θ = ('+[g('torso')+', '+g('head'),g('Ru')+', '+g('Rf'),g('Lu')+', '+g('Lf'),g('Rt')+', '+g('Rs'),g('Lt')+', '+g('Ls')].join(' │ ')+')'}
+let lastKey='',rafOn=false;
+function loop(now){
+  if(st.playing){const t=st.elapsed+(now-st.t0)/1000,pose=list()[st.idx],fr=frameAt(pose,t);
+    if(!fr){bell(520);
+      if(st.idx<list().length-1){st.idx++;st.elapsed=0;st.t0=now;frame=null;render()}
+      else{st.playing=false;st.elapsed=0;frame=null;lock(false);render();$('phase').textContent=tr('จบชุด','Routine complete')}}
+    else{const key=fr.s.k+fr.s.si+fr.s.r;if(key!==lastKey){if(lastKey&&fr.s.k!=='pause')bell(fr.s.k==='hold'?784:660);lastKey=key}
+      frame=fr;$('phase').textContent=tr(...WORDS[fr.s.k]);
+      const side=fr.pl.sides>1?tr('ข้าง '+(fr.s.si+1)+'/2','side '+(fr.s.si+1)+'/2')+' · ':'';
+      $('count').textContent=side+tr('รอบ '+(fr.s.r+1)+'/'+st.reps,'round '+(fr.s.r+1)+'/'+st.reps)+' · '+fr.left+'s'}}
+  if(st.tab==='practice'&&document.visibilityState==='visible')draw(now);
+  if(st.playing||(!reduce&&st.tab==='practice'&&document.visibilityState==='visible'))requestAnimationFrame(loop);else rafOn=false}
+function kick(){if(!rafOn){rafOn=true;requestAnimationFrame(loop)}}
+document.addEventListener('visibilitychange',()=>{if(st.playing&&document.visibilityState==='visible')lock(true);kick()});
+addEventListener('resize',()=>{if(reduce)draw(performance.now())});
+
+/* ---- thumbnails: drawn once, kept as pictures ---- */
+const THUMB={};const TS=200;let tcv=null;
+function thumb(id){if(THUMB[id])return THUMB[id];tcv=tcv||document.createElement('canvas');tcv.width=tcv.height=TS;const c=tcv.getContext('2d'),pose=BY[id];
+  paint(c,TS,pose,pose.p,.6,0,{thumb:true,still:true});return THUMB[id]=tcv.toDataURL('image/png')}
+function fillThumbs(root){const imgs=[...root.querySelectorAll('img[data-t]')];let i=0;
+  (function step(){const t0=performance.now();while(i<imgs.length&&performance.now()-t0<14){const im=imgs[i++];if(im.isConnected)im.src=thumb(im.dataset.t)}if(i<imgs.length)setTimeout(step,0)})()}
+
+/* ---- sound & wake ---- */
+let ac=null,wake=null;
+function bell(f=660){if(!st.bell)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+  const o=ac.createOscillator(),g=ac.createGain(),o2=ac.createOscillator(),t=ac.currentTime;
+  o.frequency.value=f;o2.frequency.value=f*2.76;o.connect(g);o2.connect(g);g.connect(ac.destination);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+2.2);
+  o.start(t);o2.start(t);o.stop(t+2.3);o2.stop(t+2.3)}catch(e){}}
+async function lock(on){try{if(on&&'wakeLock' in navigator)wake=await navigator.wakeLock.request('screen');else if(!on&&wake){await wake.release();wake=null}}catch(e){}}
+
+/* ================================================================ render */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const both=(th,en)=>`<span class="th-only">${esc(th)}</span><span class="en-only sep">${esc(en)}</span>`;
+const famDot=f=>`<span class="dot" style="background:var(--f-${f})"></span>`;
+function tagsHTML(p){return `<span>${famDot(p.fam)}${both(...FAMS[p.fam])}</span><span>${both(...LEVELS[p.lv])}</span>`+(p.two?`<span>${both('สองข้าง','both sides')}</span>`:'')+
+  p.areas.map(a=>`<span>${both(...AREAS[a])}</span>`).join('')}
+function renderPractice(){
+  const rs=routines();$('routines').innerHTML=rs.map(r=>`<button class="chip" data-r="${r.id}" aria-pressed="${r.id===cur().id}">${both(r.th,r.en)}</button>`).join('');
+  const L=list();if(st.idx>=L.length)st.idx=0;const pose=L[st.idx];
+  $('name-th').textContent=(st.idx+1)+'. '+pose.th;$('name-en').textContent=(st.idx+1)+'. '+pose.en;
+  $('cue-th').textContent=pose.cth;$('cue-en').textContent=pose.cen;$('pose-tags').innerHTML=tagsHTML(pose);
+  $('play').textContent=st.playing?tr('หยุด','Pause'):tr('เริ่ม','Start');
+  $('strip').innerHTML=L.map((p,i)=>`<button data-i="${i}" aria-current="${i===st.idx}" aria-label="${esc(p.th+' '+p.en)}"><img data-t="${p.id}" alt="">${i+1}</button>`).join('');fillThumbs($('strip'));
+  const inMine=st.mine.includes(pose.id);$('add-pose').innerHTML=inMine?both('✓ อยู่ในชุดของฉัน','✓ In my routine'):both('+ เพิ่มในชุดของฉัน','+ Add to my routine');
+  for(const [k,o] of [['hold','o-hold'],['reps','o-reps'],['breath','o-breath']]){$('s-'+k).value=st[k];$(o).textContent=st[k]}
+  $('s-bell').checked=st.bell;mathLine(pose);
+  if(!st.playing){$('count').textContent=tr('ราว '+mins(cur().ids)+' นาที','about '+mins(cur().ids)+' min');if(!st.elapsed)$('phase').textContent=''}
+  const s=$('strip').querySelector('[aria-current="true"]');if(s)s.scrollIntoView({block:'nearest',inline:'nearest'});
+}
+function matches(p){const q=st.q.trim().toLowerCase();
+  if(st.fam.size&&!st.fam.has(p.fam))return false;if(st.lv.size&&!st.lv.has(p.lv))return false;
+  if(st.area.size&&![...st.area].every(a=>p.areas.includes(a)))return false;
+  if(!q)return true;const hay=[p.th,p.en,p.cth,p.cen,...FAMS[p.fam],...LEVELS[p.lv],...p.areas.flatMap(a=>AREAS[a])].join(' ').toLowerCase();
+  return q.split(/\s+/).every(w=>hay.includes(w))}
+function renderLib(){
+  $('f-fam').innerHTML=Object.entries(FAMS).map(([k,v])=>`<button class="chip" data-fam="${k}" aria-pressed="${st.fam.has(k)}">${famDot(k)}${both(...v)}</button>`).join('');
+  $('f-area').innerHTML=Object.entries(AREAS).map(([k,v])=>`<button class="chip" data-area="${k}" aria-pressed="${st.area.has(k)}">${both(...v)}</button>`).join('');
+  $('f-lv').innerHTML=Object.entries(LEVELS).map(([k,v])=>`<button class="chip" data-lv="${k}" aria-pressed="${st.lv.has(+k)}">${both(...v)}</button>`).join('');
+  const shown=POSES.filter(matches);
+  $('lib-count').innerHTML=shown.length===POSES.length?both(`ทั้งหมด ${POSES.length} ท่า`,`All ${POSES.length} positions`):both(`${shown.length} จาก ${POSES.length} ท่า`,`${shown.length} of ${POSES.length} positions`);
+  $('grid').innerHTML=shown.length?shown.map(p=>{const on=st.mine.includes(p.id);return `<div class="card">
+    <button class="pic" data-see="${p.id}" aria-label="${esc(tr('ดูท่า ','Show ')+p.th)}"><img data-t="${p.id}" alt=""></button>
+    <div class="txt"><span class="th th-only">${esc(p.th)}</span><span class="enn en-only">${esc(p.en)}</span>
+    <span class="meta">${famDot(p.fam)}${both(...LEVELS[p.lv])}${p.two?' · '+both('สองข้าง','both sides'):''}</span></div>
+    <button class="add" data-add="${p.id}" aria-pressed="${on}">${on?both('✓ ในชุดแล้ว','✓ Added'):both('+ เพิ่ม','+ Add')}</button></div>`}).join('')
+    :`<div class="empty">${both('ไม่พบท่าที่ตรงกับตัวกรอง ลองล้างตัวกรอง','No position matches these filters. Try clearing them.')}</div>`;
+  fillThumbs($('grid'));
+}
+function renderMine(){
+  const m=st.mine;$('mine-empty').hidden=!!m.length;$('mine-go').disabled=!m.length;
+  $('mine-sum').innerHTML=m.length?both(`${m.length} ท่า · ราว ${mins(m)} นาที`,`${m.length} positions · about ${mins(m)} min`):'';
+  $('mlist').innerHTML=m.map((id,i)=>{const p=BY[id];return `<li><img data-t="${id}" alt=""><span class="nm"><span class="th-only">${esc(p.th)}</span><small class="en-only">${esc(p.en)}</small></span>
+    <span class="ops"><button data-mv="${i}" data-d="-1" aria-label="${esc(tr('เลื่อนขึ้น','Move up'))}" ${i?'':'disabled'}>↑</button><button data-mv="${i}" data-d="1" aria-label="${esc(tr('เลื่อนลง','Move down'))}" ${i<m.length-1?'':'disabled'}>↓</button><button data-rm="${i}" aria-label="${esc(tr('เอาออก','Remove'))}">✕</button></span></li>`}).join('');
+  fillThumbs($('mlist'));
+  $('presets').innerHTML=PRESETS.map(p=>`<button class="chip" data-preset="${p.id}">${both(p.th,p.en)} <span class="count-line">${p.ids.length}</span></button>`).join('');
+  $('mine-link').value=m.length?link('r',m):'';$('mine-clear').innerHTML=clearArmed?both('กดอีกครั้งเพื่อล้าง','Tap again to clear'):both('ล้างชุด','Clear');$('mine-clear').disabled=!m.length;
+}
+function render(){
+  document.documentElement.className='lang-'+st.lang;
+  for(const b of document.querySelectorAll('[data-lang]'))b.setAttribute('aria-pressed',b.dataset.lang===st.lang);
+  for(const b of document.querySelectorAll('[data-tab]'))b.setAttribute('aria-selected',b.dataset.tab===st.tab);
+  for(const v of ['practice','lib','mine'])$('view-'+v).hidden=st.tab!==v;
+  $('n-all').textContent=POSES.length;$('n-mine').textContent=st.mine.length||'';
+  if(st.tab==='practice'){renderPractice();kick();if(reduce)draw(performance.now())}
+  if(st.tab==='lib')renderLib();if(st.tab==='mine')renderMine();
+}
+
+/* ================================================================ sharing
+   A routine travels as a plain anchor: #r.nk.sh.eb~12-2-4 (positions ~ hold-rounds-breath). */
+const HOME='https://nanobotco.github.io/lersi/';
+const OPEN=location.protocol==='file:'||/github\.io$|localhost|127\.0\.0\.1/.test(location.hostname);
+const BASE=/github\.io$/.test(location.hostname)?location.origin+location.pathname:HOME;
+const link=(k,a)=>BASE+'#'+k+'.'+a.join('.')+'~'+st.hold+'-'+st.reps+'-'+st.breath;
+function readHash(){const h=decodeURIComponent(location.hash.slice(1));const m=/^([rp])\.([a-z.]+)(?:~(\d+)-(\d+)-(\d+))?$/.exec(h);if(!m)return;
+  const a=clean(m[2].split('.'));if(!a.length)return;
+  if(m[3]){st.hold=Math.min(40,Math.max(4,+m[3]));st.reps=Math.min(6,Math.max(1,+m[4]));st.breath=Math.min(8,Math.max(3,+m[5]))}
+  if(m[1]==='p'){st.single=a[0];st.rid='single'}else{st.shared=a;st.rid='shared'}st.idx=0;st.tab='practice'}
+function toast(msg){const t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)}
+function copy(text,box){const done=()=>toast(tr('คัดลอกแล้ว','Copied'));
+  const fallback=()=>{if(box){box.value=text;box.focus();box.select();toast(tr('เลือกข้อความไว้แล้ว กดคัดลอกได้เลย','Selected — copy it from here'))}};
+  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}}
+function asText(name,a,url){const head=tr('ฤๅษีดัดตน','Lersi dat ton')+' · '+name+' · '+tr(`${a.length} ท่า ราว ${mins(a)} นาที`,`${a.length} positions, about ${mins(a)} min`);
+  return [head,...a.map((id,i)=>(i+1)+'. '+tr(BY[id].th,BY[id].en)),tr(`ค้าง ${st.hold} วินาที · ${st.reps} รอบ`,`hold ${st.hold}s · ${st.reps} rounds`),url].join('\n')}
+
+/* the picture card, 1080 × 1350 */
+async function card(title,a,url){
+  try{await Promise.all(['700 80px Charm','500 30px Anuphan','600 30px Anuphan'].map(f=>document.fonts.load(f)))}catch(e){}
+  const W=1080,H=1350,cc=document.createElement('canvas');cc.width=W;cc.height=H;const c=cc.getContext('2d');
+  let g=c.createRadialGradient(W/2,H*.45,60,W/2,H/2,H*.8);g.addColorStop(0,'#2d1e17');g.addColorStop(1,'#0d0807');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.fillStyle='rgba(217,171,71,.12)';for(let j=0;j<12;j++)for(let i=0;i<10;i++)prajam(c,(i+(j%2?.5:0))*120,j*120,20);
+  c.textAlign='center';c.fillStyle=GOLD2;c.font='700 96px Charm, serif';c.fillText('ฤๅษีดัดตน',W/2,118);
+  c.fillStyle='#f3e6c8';c.font='500 34px Anuphan, sans-serif';c.fillText(title,W/2,172);
+  const top=205,bottom=1150;
+  if(a.length===1){const pose=BY[a[0]],sz=900,sub=document.createElement('canvas');sub.width=sub.height=sz;paint(sub.getContext('2d'),sz,pose,pose.p,.7,1800,{still:true});
+    c.drawImage(sub,(W-sz)/2,top,sz,sz);c.fillStyle='#f3e6c8';c.font='600 40px Anuphan, sans-serif';c.fillText(pose.th,W/2,top+sz+40);
+    c.fillStyle='#cdb98e';c.font='500 28px Anuphan, sans-serif';c.fillText(pose.en,W/2,top+sz+80)}
+  else{const n=Math.min(a.length,16),cols=n<=4?2:n<=9?3:4,rows=Math.ceil(n/cols),gap=14,cw=Math.min((W-80-(cols-1)*gap)/cols,(bottom-top-(rows-1)*gap)/rows/1.18),x0=(W-(cols*cw+(cols-1)*gap))/2;
+    for(let i=0;i<n;i++){const pose=BY[a[i]],x=x0+(i%cols)*(cw+gap),y=top+Math.floor(i/cols)*(cw*1.18+gap),sz=Math.round(cw),sub=document.createElement('canvas');sub.width=sub.height=sz;
+      paint(sub.getContext('2d'),sz,pose,pose.p,.7,0,{still:true,thumb:sz<300});c.drawImage(sub,x,y,sz,sz);
+      if(i===15&&a.length>16){c.fillStyle='rgba(13,8,7,.75)';c.fillRect(x,y,sz,sz);c.fillStyle=GOLD2;c.font='700 70px Anuphan, sans-serif';c.fillText('+'+(a.length-15),x+sz/2,y+sz/2+24);continue}
+      c.fillStyle='#f3e6c8';c.font=`600 ${Math.round(cw*.075)}px Anuphan, sans-serif`;let t=(i+1)+'. '+pose.th;while(c.measureText(t).width>cw-6&&t.length>4)t=t.slice(0,-2)+'…';c.fillText(t,x+cw/2,y+cw+cw*.11)}}
+  /* the foot: QR, the link, the timings */
+  c.textAlign='left';const qs=150,qx=W-60-qs,qy=H-qs-36;
+  if(window.qrcode){try{const q=qrcode(0,'M');q.addData(url);q.make();const nm=q.getModuleCount(),m=qs/(nm+2);c.fillStyle='#f3e6c8';c.fillRect(qx,qy,qs,qs);c.fillStyle='#1a0f0b';
+    for(let r=0;r<nm;r++)for(let k=0;k<nm;k++)if(q.isDark(r,k))c.fillRect(qx+m*(k+1),qy+m*(r+1),Math.ceil(m),Math.ceil(m))}catch(e){}}
+  c.fillStyle=GOLD;c.font='600 30px Anuphan, sans-serif';c.fillText(`${a.length} ท่า · ราว ${mins(a)} นาที · ค้าง ${st.hold} วินาที × ${st.reps} รอบ`,60,H-130);
+  c.fillStyle='#cdb98e';c.font='500 25px Anuphan, sans-serif';c.fillText(`${a.length} positions · about ${mins(a)} min · hold ${st.hold}s × ${st.reps}`,60,H-90);
+  c.fillStyle='#8f7d5c';c.font='500 21px Anuphan, sans-serif';let u=url;while(c.measureText(u).width>W-qs-140)u=u.slice(0,-2);c.fillText(u===url?u:u+'…',60,H-50);
+  return cc}
+let cardBlob=null;
+async function showCard(title,a,url){const cc=await card(title,a,url),d=cc.toDataURL('image/jpeg',.9);$('card-img').src=d;$('card-img').alt=title;
+  cardBlob=null;$('card-save').hidden=!(OPEN||DL);
+  cc.toBlob(b=>{cardBlob=b;if(OPEN&&navigator.canShare){const f=new File([b],'lersi.jpg',{type:'image/jpeg'});$('card-share').hidden=!navigator.canShare({files:[f]})}},'image/jpeg',.9);
+  $('card-share').dataset.url=url;$('card-share').dataset.title=title;$('overlay').hidden=false;$('card-close').focus()}
+
+/* ================================================================ events */
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+  if(d.lang){st.lang=d.lang;store.set('lang',st.lang);render()}
+  else if(d.tab){st.tab=d.tab;if(st.playing)play();render();scrollTo({top:0})}
+  else if(d.r){st.rid=d.r;if(['desk','morning','night','seated','standing','floor','all','mine'].includes(d.r))store.set('routine',d.r);st.idx=0;st.elapsed=0;frame=null;if(st.playing)play();render()}
+  else if(d.i!=null&&b.closest('#strip'))go(+d.i);
+  else if(d.fam){st.fam.has(d.fam)?st.fam.delete(d.fam):st.fam.add(d.fam);renderLib()}
+  else if(d.area){st.area.has(d.area)?st.area.delete(d.area):st.area.add(d.area);renderLib()}
+  else if(d.lv){const v=+d.lv;st.lv.has(v)?st.lv.delete(v):st.lv.add(v);renderLib()}
+  else if(d.add){toggleMine(d.add);renderLib();$('n-mine').textContent=st.mine.length||''}
+  else if(d.see){st.single=d.see;st.rid='single';st.idx=0;st.elapsed=0;frame=null;st.tab='practice';render();scrollTo({top:0})}
+  else if(d.mv!=null){const i=+d.mv,j=i+ +d.d,m=st.mine;[m[i],m[j]]=[m[j],m[i]];saveMine();renderMine()}
+  else if(d.rm!=null){st.mine.splice(+d.rm,1);saveMine();render()}
+  else if(d.preset){const p=PRESETS.find(x=>x.id===d.preset);st.mine=[...p.ids];saveMine();render();toast(tr('ใส่ชุด “'+p.th+'” แล้ว','Loaded “'+p.en+'”'))}
+});
+let clearArmed=false;
+function saveMine(){store.set('mine',st.mine)}
+function toggleMine(id){const i=st.mine.indexOf(id);i<0?st.mine.push(id):st.mine.splice(i,1);saveMine()}
+function play(){if(st.playing){st.elapsed+=(performance.now()-st.t0)/1000;st.playing=false;lock(false)}
+  else{st.playing=true;st.t0=performance.now();lastKey='';bell(660);lock(true)}renderPractice();kick()}
+function go(i){const n=list().length;st.idx=(i+n)%n;st.elapsed=0;st.t0=performance.now();lastKey='';frame=null;renderPractice();kick()}
+$('play').onclick=play;$('prev').onclick=()=>go(st.idx-1);$('next').onclick=()=>go(st.idx+1);
+$('add-pose').onclick=()=>{toggleMine(list()[st.idx].id);renderPractice();$('n-mine').textContent=st.mine.length||''};
+for(const k of ['hold','reps','breath'])$('s-'+k).oninput=e=>{st[k]=+e.target.value;store.set(k,st[k]);$('o-'+k).textContent=st[k];if(!st.playing)$('count').textContent=tr('ราว '+mins(cur().ids)+' นาที','about '+mins(cur().ids)+' min')};
+$('s-bell').onchange=e=>{st.bell=e.target.checked;store.set('bell',st.bell)};
+$('q').oninput=e=>{st.q=e.target.value;renderLib()};
+$('lib-clear').onclick=()=>{st.q='';$('q').value='';st.fam.clear();st.area.clear();st.lv.clear();renderLib()};
+$('lib-addall').onclick=()=>{const add=POSES.filter(matches).map(p=>p.id).filter(id=>!st.mine.includes(id));st.mine.push(...add);saveMine();renderLib();$('n-mine').textContent=st.mine.length||'';toast(tr(`เพิ่ม ${add.length} ท่า`,`Added ${add.length}`))};
+$('mine-go').onclick=()=>{if(!st.mine.length)return;st.rid='mine';store.set('routine','mine');st.idx=0;st.elapsed=0;frame=null;st.tab='practice';render();scrollTo({top:0})};
+$('mine-clear').onclick=()=>{if(!clearArmed){clearArmed=true;renderMine();setTimeout(()=>{clearArmed=false;if(st.tab==='mine')renderMine()},3000);return}clearArmed=false;st.mine=[];saveMine();render()};
+$('mine-copy').onclick=()=>st.mine.length&&copy(link('r',st.mine),$('mine-link'));
+$('mine-text').onclick=()=>st.mine.length&&copy(asText(tr('ชุดของฉัน','My routine'),st.mine,link('r',st.mine)),$('mine-link'));
+$('mine-card').onclick=()=>st.mine.length&&showCard(tr('ชุดของฉัน','My routine'),st.mine,link('r',st.mine));
+$('share-pose').onclick=()=>{const p=list()[st.idx];showCard(p.th+' · '+p.en,[p.id],link('p',[p.id]))};
+$('share-run').onclick=()=>{const r=cur();showCard(tr(r.th,r.en),r.ids,link('r',r.ids))};
+/* saving the card: the artifact viewer hands files over through its downloads capability */
+let DL=null;try{window.claude?.use?.('downloads').then(d=>{DL=d},()=>{})}catch(e){}
+$('card-save').onclick=async()=>{if(!cardBlob)return;
+  if(DL){try{await DL.save({filename:'lersi.jpg',data:cardBlob});toast(tr('บันทึกแล้ว','Saved'))}catch(e){if(e&&e.code!=='declined')toast(tr('บันทึกไม่ได้ในหน้านี้ กดค้างที่รูปแทน','Saving is unavailable here; long-press the picture instead'))}return}
+  const a=document.createElement('a'),u=URL.createObjectURL(cardBlob);a.href=u;a.download='lersi.jpg';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)};
+$('card-close').onclick=()=>{$('overlay').hidden=true};
+$('overlay').onclick=e=>{if(e.target.id==='overlay')$('overlay').hidden=true};
+addEventListener('keydown',e=>{if(e.key==='Escape')$('overlay').hidden=true});
+$('card-share').onclick=async()=>{const b=$('card-share').dataset;try{const f=new File([cardBlob],'lersi.jpg',{type:'image/jpeg'});await navigator.share({files:[f],title:b.title,text:b.title+' '+b.url})}catch(e){}};
+addEventListener('hashchange',()=>{readHash();render()});
+
+readHash();
+if(!routines().some(r=>r.id===st.rid))st.rid='desk';
+render();
+</script>
