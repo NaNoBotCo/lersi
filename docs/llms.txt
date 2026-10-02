@@ -1,0 +1,12 @@
+# ฤๅษีดัดตน · Lersi
+
+> Lersi dat ton (ฤๅษีดัดตน), the Thai hermit's self-stretching exercises: 41 positions, each computed from 11 joint angles and drawn as paper cut and gold on black lacquer inside a Lanna niche. Thai and English.
+
+- Positions: seated, legs straight, standing, kneeling, lying on the back, lying face down. Names describe the movement; they are not the names on the Wat Pho tablets.
+- Practice: breath-timed rounds (breathe in, hold, breathe out, rest) with a bell; hold, rounds and breath length set by the reader.
+- Positions tab: search in Thai or English; filter by posture, body area and level; add to My routine.
+- Sets: Desk break, Morning, Before sleep, Seated, Standing, On the floor, Every position.
+- Links carry a routine: #r.<ids>~<hold>-<rounds>-<breath>, e.g. https://nanobotco.github.io/lersi/#r.nk.sh.eb~12-2-4 ; one position: #p.<id>.
+- Background: Rama III commissioned 80 Reusi Dat Ton statues for Wat Pho in 1836, with poems on marble tablets; the 1838 khoi manuscript of the 80 is at the National Library, Bangkok (David Wells, "Reusi Dat Ton: The Thai Hermit's Exercises", 2010).
+
+Text and pictures CC BY 4.0, credit NaNoBotCo. Code MIT.
